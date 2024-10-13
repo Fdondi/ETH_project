@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+import string
 import requests
 import time
 import diskcache
@@ -60,63 +61,38 @@ def get_repositories_from_X_to_Y(X, Y, language='Python', sort='stars', order='d
     return repos
 
 
-def get_issues(owner, repo, labels, state, per_page, page, token):
-    url = f'https://api.github.com/repos/{owner}/{repo}/issues'
-    headers = {'Authorization': f'token {token}'}
+def get_default_branch(owner, repo, token):
+    """
+    Retrieves the default branch of a repository.
+    """
+    url = f'https://api.github.com/repos/{owner}/{repo}'
+    headers = {'Authorization': f'token {token}'} if token else {}
+    repo_data = call_with_rate_limit(url, headers, {})
+    if not repo_data or 'default_branch' not in repo_data:
+        print(f'Error fetching default branch for {owner}/{repo}: {repo_data}')
+        return 'main' # default to 'main' if the API call fails
+    return repo_data['default_branch']
+
+def get_commits_from_branch(owner, repo, branch, token):
+    """
+    Fetches commits from a repository's branch.
+    """
+    per_page = 100
+    url = f'https://api.github.com/repos/{owner}/{repo}/commits'
+    headers = {'Authorization': f'token {token}'} if token else {}
     params = {
-        'state': state,
-        'labels': labels,
+        'sha': branch,
         'per_page': per_page,
-        'page': page,
+        'page': 0,
     }
-    return call_with_rate_limit(url, headers, params)
-
-
-def get_all_issues(owner, repo, labels, state, token):
-    per_page = 100
-    page = 1
     while True:
-        issues_json = get_issues(owner, repo, labels, state, per_page, page, token)
-        if not isinstance(issues_json, list):
-            print('Error fetching issues:', issues_json)
-            break
-        if not issues_json:
-            break
-        for issue in issues_json:
-            yield issue
-        page += 1
-    # Filter out pull requests
-
-
-def get_issue_timeline(owner, repo, issue_number, token):
-    url = f'https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}/timeline'
-    headers = {
-        'Authorization': f'token {token}',
-        'Accept': 'application/vnd.github.mockingbird-preview+json'
-    }
-    per_page = 100
-    page = 1
-    while True:
-        params = {'per_page': per_page, 'page': page}
-        events = call_with_rate_limit(url, headers, params)
-        if not isinstance(events, list):
-            print('Error fetching timeline:', events)
-            break
-        if not events:
-            break
-        for event in events:
-            yield event
-        page += 1
-
-
-def get_commits_from_issue_timeline(owner, repo, issue_number, token):
-    for event in get_issue_timeline(owner, repo, issue_number, token):
-        if event.get('event') == 'closed' and 'commit_id' in event and event['commit_id'] is not None:
-            yield event['commit_id']
-        elif event.get('event') == 'cross-referenced':
-            source = event.get('source', {})
-            if source.get('type') == 'commit' and 'commit' in source:
-                yield source['commit']['sha']
+        commits_json = call_with_rate_limit(url, headers, params)
+        params['page'] += 1
+        if not commits_json:
+            return
+        else:
+            for commit in commits_json:
+                yield commit['sha']
 
 
 def get_commit_files(owner, repo, sha, token):
@@ -128,42 +104,44 @@ def get_commit_files(owner, repo, sha, token):
         return None
     return commit_data["files"]
 
+def is_ascii(s):
+    return all(c in string.printable for c in s)
 
 def main():
     token = "<token>"
     X = 10
     Y = 100
     repository_count = 0
-    issue_count = 0
     commit_count = 0
     file_count = 0
     print('Fetching repositories...')
     for repo in get_repositories_from_X_to_Y(X, Y, language='Python', sort='stars', order='desc', token=token):
-        print(f"until now: {repository_count=}, {issue_count=}, {commit_count=}, {file_count=}")
+        print(f"until now: {repository_count=}, {commit_count=}, {file_count=}")
         repository_count += 1
         owner = repo['owner']['login']
         repo_name = repo['name']
         print(f'\nProcessing repository #{repository_count}: {owner}/{repo_name}')
-        for issue in get_all_issues(owner, repo_name, labels='bug', state='closed', token=token):
-            issue_count += 1
-            print(f'\nProcessing issue #{issue_count}: {issue["title"]}')
-            for sha in get_commits_from_issue_timeline(owner, repo_name, issue['number'], token):
-                commit_count += 1
-                print(f'Fetching commit #{commit_count}: {sha}...')
-                files = get_commit_files(owner, repo_name, sha, token)
-                if not files:
+        for sha in get_commits_from_branch(owner, repo_name, get_default_branch(owner,repo_name,token), token):
+            print(f"until now: {repository_count=}, {commit_count=}, {file_count=}")
+            commit_count += 1
+            print(f'Fetching commit #{commit_count}: {sha}...')
+            files = get_commit_files(owner, repo_name, sha, token)
+            if not files:
+                continue
+            for file in files:
+                filename = file['filename']
+                print(f'Checking file {filename}...')
+                if not is_ascii(filename):
+                    print(f'File {filename} is not ASCII. Skipping...')
                     continue
-                for file in files:
-                    filename = file['filename']
-                    if 'test' in filename.lower():
-                        file_count += 1
-                        print(f'File #{file_count}: {filename}')
-                        print(f'Commit {sha} in issue #{issue["number"]} changes file {filename}')
-                        # Save the data to a file
-                        path = Path('data') / owner / repo_name / f'issue_{issue["number"]}' / sha
-                        path.mkdir(parents=True, exist_ok=True)
-                        with open(path / "files.txt", 'w') as f:
-                            f.write(str(files))
+                if 'test' in filename.strip().lower():
+                    file_count += 1
+                    print(f'File #{file_count}: Commit {sha} changes file {filename}')
+                    # Save the data to a file
+                    path = Path('data') / owner / repo_name / f'commit_{sha}' / sha
+                    path.mkdir(parents=True, exist_ok=True)
+                    with open(path / "files.json", 'w') as f:
+                        json.dump(files, f, indent=4)
 
 if __name__ == '__main__':
     main()
