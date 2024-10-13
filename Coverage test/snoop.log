@@ -1,0 +1,19 @@
+Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\sum.py
+Starting var:.. num1 = 2
+Starting var:.. num2 = 2
+23:45:17.366254 call         7 def sum_only_positive(num1, num2):
+23:45:17.367255 line         8     if num1 > 0 and num2 > 0:
+23:45:17.368255 line         9         return num1 + num2
+23:45:17.368255 return       9         return num1 + num2
+Return value:.. 4
+Elapsed time: 00:00:00.002001
+Starting var:.. num1 = -1
+Starting var:.. num2 = 2
+23:45:17.369255 call         7 def sum_only_positive(num1, num2):
+23:45:17.369255 line         8     if num1 > 0 and num2 > 0:
+23:45:17.370259 line        10     elif num1 > 0:
+23:45:17.370259 line        12     elif num2 > 0:
+23:45:17.370259 line        13         return num2
+23:45:17.370259 return      13         return num2
+Return value:.. 2
+Elapsed time: 00:00:00.001999

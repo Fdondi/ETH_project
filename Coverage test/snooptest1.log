@@ -1,0 +1,31 @@
+Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\test.py
+23:47:15.906650 call         9 def test_sum_positive_ok():
+23:47:15.907651 line        10     assert sum_only_positive(2, 2) == 4
+New var:....... @py_assert1 = None
+New var:....... @py_assert3 = None
+New var:....... @py_assert5 = None
+New var:....... @py_assert8 = None
+New var:....... @py_assert7 = None
+23:47:15.907651 return      10     assert sum_only_positive(2, 2) == 4
+Return value:.. None
+Elapsed time: 00:00:00.002002
+Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\test.py
+23:48:22.372825 call         9 def test_sum_positive_ok():
+23:48:22.373828 line        10     assert sum_only_positive(2, 2) == 4
+    Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\sum.py
+    Starting var:.. num1 = 2
+    Starting var:.. num2 = 2
+    23:48:22.373828 call         4 def sum_only_positive(num1, num2):
+    23:48:22.374831 line         5     if num1 > 0 and num2 > 0:
+    23:48:22.374831 line         6         return num1 + num2
+    23:48:22.374831 return       6         return num1 + num2
+    Return value:.. 4
+Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\test.py
+New var:....... @py_assert1 = None
+New var:....... @py_assert3 = None
+New var:....... @py_assert5 = None
+New var:....... @py_assert8 = None
+New var:....... @py_assert7 = None
+23:48:22.375830 return      10     assert sum_only_positive(2, 2) == 4
+Return value:.. None
+Elapsed time: 00:00:00.004006

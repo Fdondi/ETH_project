@@ -1,0 +1,1278 @@
+Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\test.py
+23:47:15.909651 call        13 def test_sum_positive_fail():
+23:47:15.909651 line        14     assert sum_only_positive(-1, 2) is None
+New var:....... @py_assert1 = 1
+New var:....... @py_assert3 = -1
+New var:....... @py_assert4 = 2
+New var:....... @py_assert6 = 2
+New var:....... @py_assert9 = None
+New var:....... @py_assert8 = False
+New var:....... @py_format11 = '2\n{2 = sum_only_positive(-1, 2)\n} is None'
+New var:....... @py_format13 = 'assert 2\n{2 = sum_only_positive(-1, 2)\n} is None'
+23:47:15.910653 exception   14     assert sum_only_positive(-1, 2) is None
+Exception:..... AssertionError: assert 2 is None
+ +  where 2 = sum_only_positive(-1, 2)
+Call ended by exception
+Elapsed time: 00:00:00.002506
+Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\test.py
+23:48:22.376831 call        13 def test_sum_positive_fail():
+23:48:22.377831 line        14     assert sum_only_positive(-1, 2) is None
+    Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\sum.py
+    Starting var:.. num1 = -1
+    Starting var:.. num2 = 2
+    23:48:22.377831 call         4 def sum_only_positive(num1, num2):
+    23:48:22.377831 line         5     if num1 > 0 and num2 > 0:
+    23:48:22.378830 line         7     elif num1 > 0:
+    23:48:22.378830 line         9     elif num2 > 0:
+    23:48:22.378830 line        10         return num2
+    23:48:22.378830 return      10         return num2
+    Return value:.. 2
+    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+    Starting var:.. ops = ('is',)
+    Starting var:.. results = (False,)
+    Starting var:.. expls = ('%(py7)s\n{%(py7)s = %(py0)s(-%(py2)s, %(py5)s)\n} is %(py10)s',)
+    Starting var:.. each_obj = (2, None)
+    23:48:22.378830 call       488 def _call_reprcompare(
+    23:48:22.379831 line       494     for i, res, expl in zip(range(len(ops)), results, expls):
+    New var:....... i = 0
+    New var:....... res = False
+    New var:....... expl = '%(py7)s\n{%(py7)s = %(py0)s(-%(py2)s, %(py5)s)\n} is %(py10)s'
+    23:48:22.379831 line       495         try:
+    23:48:22.380830 line       496             done = not res
+    New var:....... done = True
+    23:48:22.380830 line       499         if done:
+    23:48:22.380830 line       500             break
+    23:48:22.380830 line       501     if util._reprcompare is not None:
+    23:48:22.380830 line       502         custom = util._reprcompare(ops[i], each_obj[i], each_obj[i + 1])
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\__init__.py
+        Starting var:.. op = 'is'
+        Starting var:.. left = 2
+        Starting var:.. right = None
+        Starting var:.. ihook = <_pytest.config.compat.PathAwareHookProxy object at 0x000001A88CD41370>
+        Starting var:.. item = <Function test_sum_positive_fail>
+        23:48:22.380830 call       136     def callbinrepr(op, left: object, right: object) -> str | None:
+        23:48:22.383336 line       151         hook_result = ihook.pytest_assertrepr_compare(
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\config\compat.py
+            Starting var:.. self = <_pytest.config.compat.PathAwareHookProxy object at 0x000001A88CD41370>
+            Starting var:.. key = 'pytest_assertrepr_compare'
+            23:48:22.383336 call        49     def __getattr__(self, key: str) -> pluggy.HookCaller:
+            23:48:22.384337 line        50         hook: pluggy.HookCaller = getattr(self._hook_relay, key)
+            New var:....... hook = <HookCaller 'pytest_assertrepr_compare'>
+            23:48:22.384337 line        51         if key not in imply_paths_hooks:
+            23:48:22.384337 line        52             self.__dict__[key] = hook
+            23:48:22.384337 line        53             return hook
+            23:48:22.384337 return      53             return hook
+            Return value:.. <HookCaller 'pytest_assertrepr_compare'>
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\__init__.py
+        23:48:22.385337 line       152             config=item.config, op=op, left=left, right=right
+        23:48:22.385337 line       151         hook_result = ihook.pytest_assertrepr_compare(
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\pluggy\_hooks.py
+            Starting var:.. self = <HookCaller 'pytest_assertrepr_compare'>
+            Starting var:.. kwargs = {'config': <_pytest.config.Config object at 0x00...88C6DB950>, 'op': 'is', 'left': 2, 'right': None}
+            23:48:22.385337 call       498     def __call__(self, **kwargs: object) -> Any:
+            23:48:22.386336 line       508             not self.is_historic()
+                Starting var:.. self = <HookCaller 'pytest_assertrepr_compare'>
+                23:48:22.386336 call       438     def is_historic(self) -> bool:
+                23:48:22.386336 line       440         return self._call_history is not None
+                23:48:22.387336 return     440         return self._call_history is not None
+                Return value:.. False
+            23:48:22.387336 line       510         self._verify_all_args_are_provided(kwargs)
+                Starting var:.. self = <HookCaller 'pytest_assertrepr_compare'>
+                Starting var:.. kwargs = {'config': <_pytest.config.Config object at 0x00...88C6DB950>, 'op': 'is', 'left': 2, 'right': None}
+                23:48:22.387336 call       480     def _verify_all_args_are_provided(self, kwargs: Mapping[str, object]) -> None:
+                23:48:22.387336 line       482         if self.spec:
+                23:48:22.387336 line       483             for argname in self.spec.argnames:
+                New var:....... argname = 'config'
+                23:48:22.388336 line       484                 if argname not in kwargs:
+                23:48:22.388336 line       483             for argname in self.spec.argnames:
+                Modified var:.. argname = 'op'
+                23:48:22.388336 line       484                 if argname not in kwargs:
+                23:48:22.388336 line       483             for argname in self.spec.argnames:
+                Modified var:.. argname = 'left'
+                23:48:22.388336 line       484                 if argname not in kwargs:
+                23:48:22.389336 line       483             for argname in self.spec.argnames:
+                Modified var:.. argname = 'right'
+                23:48:22.389336 line       484                 if argname not in kwargs:
+                23:48:22.389336 line       483             for argname in self.spec.argnames:
+                23:48:22.389336 return     483             for argname in self.spec.argnames:
+                Return value:.. None
+            23:48:22.389336 line       511         firstresult = self.spec.opts.get("firstresult", False) if self.spec else False
+            New var:....... firstresult = False
+            23:48:22.390337 line       513         return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+                Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\pluggy\_manager.py
+                Starting var:.. self = <_pytest.config.PytestPluginManager object at 0x000001A88C18FC50>
+                Starting var:.. hook_name = 'pytest_assertrepr_compare'
+                Starting var:.. methods = [<HookImpl plugin_name='assertion', plugin=<modu...ite-packages\\_pytest\\assertion\\__init__.py'>>]
+                Starting var:.. kwargs = {'config': <_pytest.config.Config object at 0x00...88C6DB950>, 'op': 'is', 'left': 2, 'right': None}
+                Starting var:.. firstresult = False
+                23:48:22.390337 call       111     def _hookexec(
+                23:48:22.391336 line       120         return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+                    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\pluggy\_callers.py
+                    Starting var:.. hook_name = 'pytest_assertrepr_compare'
+                    Starting var:.. hook_impls = [<HookImpl plugin_name='assertion', plugin=<modu...ite-packages\\_pytest\\assertion\\__init__.py'>>]
+                    Starting var:.. caller_kwargs = {'config': <_pytest.config.Config object at 0x00...88C6DB950>, 'op': 'is', 'left': 2, 'right': None}
+                    Starting var:.. firstresult = False
+                    23:48:22.391336 call        53 def _multicall(
+                    23:48:22.392337 line        64     __tracebackhide__ = True
+                    New var:....... __tracebackhide__ = True
+                    23:48:22.392337 line        65     results: list[object] = []
+                    New var:....... results = []
+                    23:48:22.393384 line        66     exception = None
+                    New var:....... exception = None
+                    23:48:22.393384 line        67     only_new_style_wrappers = True
+                    New var:....... only_new_style_wrappers = True
+                    23:48:22.393384 line        68     try:  # run impl and wrapper setup functions in a loop
+                    23:48:22.394384 line        69         teardowns: list[Teardown] = []
+                    New var:....... teardowns = []
+                    23:48:22.394384 line        70         try:
+                    23:48:22.394384 line        71             for hook_impl in reversed(hook_impls):
+                    New var:....... hook_impl = <HookImpl plugin_name='assertion', plugin=<modul...site-packages\\_pytest\\assertion\\__init__.py'>>
+                    23:48:22.394384 line        72                 try:
+                    23:48:22.395383 line        73                     args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    New var:....... argname = 'config'
+                    23:48:22.395383 line        73                     args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    Modified var:.. argname = 'op'
+                    23:48:22.395383 line        73                     args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    Modified var:.. argname = 'left'
+                    23:48:22.395383 line        73                     args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    Modified var:.. argname = 'right'
+                    23:48:22.395383 line        73                     args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    New var:....... args = [<_pytest.config.Config object at 0x000001A88C6DB950>, 'is', 2, None]
+                    23:48:22.396383 line        81                 if hook_impl.hookwrapper:
+                    23:48:22.396383 line        92                 elif hook_impl.wrapper:
+                    23:48:22.396383 line       103                     res = hook_impl.function(*args)
+                        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\__init__.py
+                        Starting var:.. config = <_pytest.config.Config object at 0x000001A88C6DB950>
+                        Starting var:.. op = 'is'
+                        Starting var:.. left = 2
+                        Starting var:.. right = None
+                        23:48:22.396383 call       189 def pytest_assertrepr_compare(
+                        23:48:22.397383 line       192     return util.assertrepr_compare(config=config, op=op, left=left, right=right)
+                            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\util.py
+                            Starting var:.. config = <_pytest.config.Config object at 0x000001A88C6DB950>
+                            Starting var:.. op = 'is'
+                            Starting var:.. left = 2
+                            Starting var:.. right = None
+                            Starting var:.. use_ascii = False
+                            23:48:22.397383 call       170 def assertrepr_compare(
+                            23:48:22.398384 line       174     verbose = config.get_verbosity(Config.VERBOSITY_ASSERTIONS)
+                                Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\config\__init__.py
+                                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                                Starting var:.. verbosity_type = 'assertions'
+                                23:48:22.399384 call      1720     def get_verbosity(self, verbosity_type: str | None = None) -> int:
+                                23:48:22.400384 line      1751         global_level = self.getoption("verbose", default=0)
+                                    Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                                    Starting var:.. name = 'verbose'
+                                    Starting var:.. default = 0
+                                    Starting var:.. skip = False
+                                    23:48:22.400384 call      1682     def getoption(self, name: str, default=notset, skip: bool = False):
+                                    23:48:22.401384 line      1691         name = self._opt2dest.get(name, name)
+                                    23:48:22.401384 line      1692         try:
+                                    23:48:22.401384 line      1693             val = getattr(self.option, name)
+                                    New var:....... val = 0
+                                    23:48:22.401384 line      1694             if val is None and skip:
+                                    23:48:22.402383 line      1696             return val
+                                    23:48:22.402383 return    1696             return val
+                                    Return value:.. 0
+                                New var:....... global_level = 0
+                                23:48:22.402383 line      1752         assert isinstance(global_level, int)
+                                23:48:22.402383 line      1753         if verbosity_type is None:
+                                23:48:22.403506 line      1756         ini_name = Config._verbosity_ini_name(verbosity_type)
+                                    Starting var:.. verbosity_type = 'assertions'
+                                    23:48:22.403506 call      1767     def _verbosity_ini_name(verbosity_type: str) -> str:
+                                    23:48:22.403506 line      1768         return f"verbosity_{verbosity_type}"
+                                    23:48:22.403506 return    1768         return f"verbosity_{verbosity_type}"
+                                    Return value:.. 'verbosity_assertions'
+                                New var:....... ini_name = 'verbosity_assertions'
+                                23:48:22.403506 line      1757         if ini_name not in self._parser._inidict:
+                                23:48:22.404505 line      1760         level = self.getini(ini_name)
+                                    Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                                    Starting var:.. name = 'verbosity_assertions'
+                                    23:48:22.404505 call      1554     def getini(self, name: str):
+                                    23:48:22.404505 line      1582         try:
+                                    23:48:22.404505 line      1583             return self._inicache[name]
+                                    23:48:22.405504 exception 1583             return self._inicache[name]
+                                    Exception:..... KeyError: 'verbosity_assertions'
+                                    23:48:22.405504 line      1584         except KeyError:
+                                    23:48:22.405504 line      1585             self._inicache[name] = val = self._getini(name)
+                                        Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                                        Starting var:.. name = 'verbosity_assertions'
+                                        23:48:22.405504 call      1594     def _getini(self, name: str):
+                                        23:48:22.406505 line      1595         try:
+                                        23:48:22.406505 line      1596             description, type, default = self._parser._inidict[name]
+                                        New var:....... description = 'Specify a verbosity level for assertions, overr...re detailed explanation when an assertion fails.'
+                                        New var:....... type = 'string'
+                                        New var:....... default = 'auto'
+                                        23:48:22.406505 line      1599         override_value = self._get_override_ini_value(name)
+                                            Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                                            Starting var:.. name = 'verbosity_assertions'
+                                            23:48:22.406505 call      1665     def _get_override_ini_value(self, name: str) -> str | None:
+                                            23:48:22.407505 line      1666         value = None
+                                            New var:....... value = None
+                                            23:48:22.407505 line      1670         for ini_config in self._override_ini:
+                                            23:48:22.407505 line      1680         return value
+                                            23:48:22.408537 return    1680         return value
+                                            Return value:.. None
+                                        New var:....... override_value = None
+                                        23:48:22.408537 line      1600         if override_value is None:
+                                        23:48:22.408537 line      1601             try:
+                                        23:48:22.408537 line      1602                 value = self.inicfg[name]
+                                        23:48:22.408537 exception 1602                 value = self.inicfg[name]
+                                        Exception:..... KeyError: 'verbosity_assertions'
+                                        23:48:22.409537 line      1603             except KeyError:
+                                        23:48:22.409537 line      1604                 return default
+                                        23:48:22.409537 return    1604                 return default
+                                        Return value:.. 'auto'
+                                    New var:....... val = 'auto'
+                                    23:48:22.410537 line      1586             return val
+                                    23:48:22.410537 return    1586             return val
+                                    Return value:.. 'auto'
+                                New var:....... level = 'auto'
+                                23:48:22.410537 line      1761         if level == Config._VERBOSITY_INI_DEFAULT:
+                                23:48:22.410537 line      1762             return global_level
+                                23:48:22.410537 return    1762             return global_level
+                                Return value:.. 0
+                            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\util.py
+                            New var:....... verbose = 0
+                            23:48:22.410537 line       179         isinstance(left, str)
+                            23:48:22.412039 line       178     use_ascii = (
+                            23:48:22.412039 line       184     if verbose > 1:
+                            23:48:22.412039 line       191             80 - 15 - len(op) - 2
+                            23:48:22.412039 line       192         ) // 2  # 15 chars indentation, 1 space around op
+                            23:48:22.412039 line       190         maxsize = (
+                            New var:....... maxsize = 30
+                            23:48:22.412039 line       194         left_repr = saferepr(left, maxsize=maxsize, use_ascii=use_ascii)
+                                Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+                                Starting var:.. obj = 2
+                                Starting var:.. maxsize = 30
+                                Starting var:.. use_ascii = False
+                                23:48:22.413042 call        99 def saferepr(
+                                23:48:22.413042 line       111     return SafeRepr(maxsize, use_ascii).repr(obj)
+                                    Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450C20>
+                                    Starting var:.. maxsize = 30
+                                    Starting var:.. use_ascii = False
+                                    Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+                                    23:48:22.413042 call        42     def __init__(self, maxsize: int | None, use_ascii: bool = False) -> None:
+                                    23:48:22.414043 line        49         super().__init__()
+                                        Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                                        Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450C20>
+                                        Starting var:.. maxlevel = 6
+                                        Starting var:.. maxtuple = 6
+                                        Starting var:.. maxlist = 6
+                                        Starting var:.. maxarray = 5
+                                        Starting var:.. maxdict = 4
+                                        Starting var:.. maxset = 6
+                                        Starting var:.. maxfrozenset = 6
+                                        Starting var:.. maxdeque = 6
+                                        Starting var:.. maxstring = 30
+                                        Starting var:.. maxlong = 40
+                                        Starting var:.. maxother = 30
+                                        Starting var:.. fillvalue = '...'
+                                        Starting var:.. indent = None
+                                        23:48:22.414043 call        39     def __init__(
+                                        23:48:22.416044 line        44         self.maxlevel = maxlevel
+                                        23:48:22.416044 line        45         self.maxtuple = maxtuple
+                                        23:48:22.417043 line        46         self.maxlist = maxlist
+                                        23:48:22.417043 line        47         self.maxarray = maxarray
+                                        23:48:22.417043 line        48         self.maxdict = maxdict
+                                        23:48:22.417043 line        49         self.maxset = maxset
+                                        23:48:22.417043 line        50         self.maxfrozenset = maxfrozenset
+                                        23:48:22.418043 line        51         self.maxdeque = maxdeque
+                                        23:48:22.418043 line        52         self.maxstring = maxstring
+                                        23:48:22.418043 line        53         self.maxlong = maxlong
+                                        23:48:22.419043 line        54         self.maxother = maxother
+                                        23:48:22.419043 line        55         self.fillvalue = fillvalue
+                                        23:48:22.419043 line        56         self.indent = indent
+                                        23:48:22.419043 return      56         self.indent = indent
+                                        Return value:.. None
+                                    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+                                    23:48:22.420043 line        53         self.maxstring = maxsize if maxsize is not None else 1_000_000_000
+                                    23:48:22.420043 line        54         self.maxsize = maxsize
+                                    23:48:22.420043 line        55         self.use_ascii = use_ascii
+                                    23:48:22.420043 return      55         self.use_ascii = use_ascii
+                                    Return value:.. None
+                                    Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450C20>
+                                    Starting var:.. x = 2
+                                    Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+                                    23:48:22.420043 call        57     def repr(self, x: object) -> str:
+                                    23:48:22.421042 line        58         try:
+                                    23:48:22.421042 line        59             if self.use_ascii:
+                                    23:48:22.421042 line        62                 s = super().repr(x)
+                                        Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                                        Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450C20>
+                                        Starting var:.. x = 2
+                                        23:48:22.422043 call        58     def repr(self, x):
+                                        23:48:22.422043 line        59         return self.repr1(x, self.maxlevel)
+                                            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450C20>
+                                            Starting var:.. x = 2
+                                            Starting var:.. level = 6
+                                            23:48:22.422043 call        61     def repr1(self, x, level):
+                                            23:48:22.423149 line        62         typename = type(x).__name__
+                                            New var:....... typename = 'int'
+                                            23:48:22.423149 line        63         if ' ' in typename:
+                                            23:48:22.423149 line        66         if hasattr(self, 'repr_' + typename):
+                                            23:48:22.423149 line        67             return getattr(self, 'repr_' + typename)(x, level)
+                                                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450C20>
+                                                Starting var:.. x = 2
+                                                Starting var:.. level = 6
+                                                23:48:22.424149 call       161     def repr_int(self, x, level):
+                                                23:48:22.424149 line       162         s = builtins.repr(x) # XXX Hope this isn't too slow...
+                                                New var:....... s = '2'
+                                                23:48:22.424149 line       163         if len(s) > self.maxlong:
+                                                23:48:22.425149 line       167         return s
+                                                23:48:22.425149 return     167         return s
+                                                Return value:.. '2'
+                                            23:48:22.425149 return      67             return getattr(self, 'repr_' + typename)(x, level)
+                                            Return value:.. '2'
+                                        23:48:22.425149 return      59         return self.repr1(x, self.maxlevel)
+                                        Return value:.. '2'
+                                    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+                                    New var:....... s = '2'
+                                    23:48:22.426148 line        67         if self.maxsize is not None:
+                                    23:48:22.426148 line        68             s = _ellipsize(s, self.maxsize)
+                                        Starting var:.. s = '2'
+                                        Starting var:.. maxsize = 30
+                                        23:48:22.426148 call        28 def _ellipsize(s: str, maxsize: int) -> str:
+                                        23:48:22.427149 line        29     if len(s) > maxsize:
+                                        23:48:22.427149 line        33     return s
+                                        23:48:22.427149 return      33     return s
+                                        Return value:.. '2'
+                                    23:48:22.427149 line        69         return s
+                                    23:48:22.427149 return      69         return s
+                                    Return value:.. '2'
+                                23:48:22.428148 return     111     return SafeRepr(maxsize, use_ascii).repr(obj)
+                                Return value:.. '2'
+                            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\util.py
+                            New var:....... left_repr = '2'
+                            23:48:22.428148 line       195         right_repr = saferepr(right, maxsize=maxsize, use_ascii=use_ascii)
+                                Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+                                Starting var:.. obj = None
+                                Starting var:.. maxsize = 30
+                                Starting var:.. use_ascii = False
+                                23:48:22.428148 call        99 def saferepr(
+                                23:48:22.429149 line       111     return SafeRepr(maxsize, use_ascii).repr(obj)
+                                    Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D4507A0>
+                                    Starting var:.. maxsize = 30
+                                    Starting var:.. use_ascii = False
+                                    Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+                                    23:48:22.429149 call        42     def __init__(self, maxsize: int | None, use_ascii: bool = False) -> None:
+                                    23:48:22.430148 line        49         super().__init__()
+                                        Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                                        Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D4507A0>
+                                        Starting var:.. maxlevel = 6
+                                        Starting var:.. maxtuple = 6
+                                        Starting var:.. maxlist = 6
+                                        Starting var:.. maxarray = 5
+                                        Starting var:.. maxdict = 4
+                                        Starting var:.. maxset = 6
+                                        Starting var:.. maxfrozenset = 6
+                                        Starting var:.. maxdeque = 6
+                                        Starting var:.. maxstring = 30
+                                        Starting var:.. maxlong = 40
+                                        Starting var:.. maxother = 30
+                                        Starting var:.. fillvalue = '...'
+                                        Starting var:.. indent = None
+                                        23:48:22.430148 call        39     def __init__(
+                                        23:48:22.432148 line        44         self.maxlevel = maxlevel
+                                        23:48:22.432148 line        45         self.maxtuple = maxtuple
+                                        23:48:22.432148 line        46         self.maxlist = maxlist
+                                        23:48:22.433357 line        47         self.maxarray = maxarray
+                                        23:48:22.433357 line        48         self.maxdict = maxdict
+                                        23:48:22.433357 line        49         self.maxset = maxset
+                                        23:48:22.433357 line        50         self.maxfrozenset = maxfrozenset
+                                        23:48:22.433357 line        51         self.maxdeque = maxdeque
+                                        23:48:22.433357 line        52         self.maxstring = maxstring
+                                        23:48:22.433357 line        53         self.maxlong = maxlong
+                                        23:48:22.434357 line        54         self.maxother = maxother
+                                        23:48:22.434357 line        55         self.fillvalue = fillvalue
+                                        23:48:22.434357 line        56         self.indent = indent
+                                        23:48:22.434357 return      56         self.indent = indent
+                                        Return value:.. None
+                                    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+                                    23:48:22.434357 line        53         self.maxstring = maxsize if maxsize is not None else 1_000_000_000
+                                    23:48:22.435356 line        54         self.maxsize = maxsize
+                                    23:48:22.435356 line        55         self.use_ascii = use_ascii
+                                    23:48:22.435356 return      55         self.use_ascii = use_ascii
+                                    Return value:.. None
+                                    Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D4507A0>
+                                    Starting var:.. x = None
+                                    Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+                                    23:48:22.435356 call        57     def repr(self, x: object) -> str:
+                                    23:48:22.436356 line        58         try:
+                                    23:48:22.436356 line        59             if self.use_ascii:
+                                    23:48:22.436356 line        62                 s = super().repr(x)
+                                        Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                                        Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D4507A0>
+                                        Starting var:.. x = None
+                                        23:48:22.436356 call        58     def repr(self, x):
+                                        23:48:22.437356 line        59         return self.repr1(x, self.maxlevel)
+                                            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D4507A0>
+                                            Starting var:.. x = None
+                                            Starting var:.. level = 6
+                                            23:48:22.437356 call        61     def repr1(self, x, level):
+                                            23:48:22.437356 line        62         typename = type(x).__name__
+                                            New var:....... typename = 'NoneType'
+                                            23:48:22.438356 line        63         if ' ' in typename:
+                                            23:48:22.438356 line        66         if hasattr(self, 'repr_' + typename):
+                                            23:48:22.438356 line        69             return self.repr_instance(x, level)
+                                                Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+                                                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D4507A0>
+                                                Starting var:.. x = None
+                                                Starting var:.. level = 6
+                                                23:48:22.438356 call        71     def repr_instance(self, x: object, level: int) -> str:
+                                                23:48:22.439356 line        72         try:
+                                                23:48:22.439356 line        73             s = repr(x)
+                                                New var:....... s = 'None'
+                                                23:48:22.439356 line        78         if self.maxsize is not None:
+                                                23:48:22.440356 line        79             s = _ellipsize(s, self.maxsize)
+                                                    Starting var:.. s = 'None'
+                                                    Starting var:.. maxsize = 30
+                                                    23:48:22.440356 call        28 def _ellipsize(s: str, maxsize: int) -> str:
+                                                    23:48:22.440356 line        29     if len(s) > maxsize:
+                                                    23:48:22.440356 line        33     return s
+                                                    23:48:22.441357 return      33     return s
+                                                    Return value:.. 'None'
+                                                23:48:22.441357 line        80         return s
+                                                23:48:22.441357 return      80         return s
+                                                Return value:.. 'None'
+                                            Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                                            23:48:22.441357 return      69             return self.repr_instance(x, level)
+                                            Return value:.. 'None'
+                                        23:48:22.442356 return      59         return self.repr1(x, self.maxlevel)
+                                        Return value:.. 'None'
+                                    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+                                    New var:....... s = 'None'
+                                    23:48:22.442356 line        67         if self.maxsize is not None:
+                                    23:48:22.442356 line        68             s = _ellipsize(s, self.maxsize)
+                                        Starting var:.. s = 'None'
+                                        Starting var:.. maxsize = 30
+                                        23:48:22.442356 call        28 def _ellipsize(s: str, maxsize: int) -> str:
+                                        23:48:22.443482 line        29     if len(s) > maxsize:
+                                        23:48:22.443482 line        33     return s
+                                        23:48:22.443482 return      33     return s
+                                        Return value:.. 'None'
+                                    23:48:22.443482 line        69         return s
+                                    23:48:22.443482 return      69         return s
+                                    Return value:.. 'None'
+                                23:48:22.444482 return     111     return SafeRepr(maxsize, use_ascii).repr(obj)
+                                Return value:.. 'None'
+                            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\util.py
+                            New var:....... right_repr = 'None'
+                            23:48:22.444482 line       197     summary = f"{left_repr} {op} {right_repr}"
+                            New var:....... summary = '2 is None'
+                            23:48:22.445481 line       198     highlighter = config.get_terminal_writer()._highlight
+                                Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\config\__init__.py
+                                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                                23:48:22.445481 call      1129     def get_terminal_writer(self) -> TerminalWriter:
+                                23:48:22.445481 line      1130         terminalreporter: TerminalReporter | None = self.pluginmanager.get_plugin(
+                                23:48:22.445481 line      1131             "terminalreporter"
+                                23:48:22.445481 line      1130         terminalreporter: TerminalReporter | None = self.pluginmanager.get_plugin(
+                                    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\pluggy\_manager.py
+                                    Starting var:.. self = <_pytest.config.PytestPluginManager object at 0x000001A88C18FC50>
+                                    Starting var:.. name = 'terminalreporter'
+                                    23:48:22.446481 call       312     def get_plugin(self, name: str) -> Any | None:
+                                    23:48:22.446481 line       314         return self._name2plugin.get(name)
+                                    23:48:22.446481 return     314         return self._name2plugin.get(name)
+                                    Return value:.. <_pytest.terminal.TerminalReporter object at 0x000001A88D3B6D20>
+                                Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\config\__init__.py
+                                New var:....... terminalreporter = <_pytest.terminal.TerminalReporter object at 0x000001A88D3B6D20>
+                                23:48:22.447482 line      1133         assert terminalreporter is not None
+                                23:48:22.447482 line      1134         return terminalreporter._tw
+                                23:48:22.447482 return    1134         return terminalreporter._tw
+                                Return value:.. <_pytest._io.terminalwriter.TerminalWriter object at 0x000001A88D363680>
+                            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\util.py
+                            New var:....... highlighter = <bound method TerminalWriter._highlight of <_pyt...ter.TerminalWriter object at 0x000001A88D363680>>
+                            23:48:22.447482 line       200     explanation = None
+                            New var:....... explanation = None
+                            23:48:22.448481 line       201     try:
+                            23:48:22.448481 line       202         if op == "==":
+                            23:48:22.448481 line       204         elif op == "not in":
+                            23:48:22.449482 line       207         elif op == "!=":
+                            23:48:22.449482 line       210         elif op == ">=":
+                            23:48:22.449482 line       213         elif op == "<=":
+                            23:48:22.449482 line       216         elif op == ">":
+                            23:48:22.449482 line       219         elif op == "<":
+                            23:48:22.449482 line       232     if not explanation:
+                            23:48:22.450482 line       233         return None
+                            23:48:22.450482 return     233         return None
+                            Return value:.. None
+                        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\__init__.py
+                        23:48:22.450482 return     192     return util.assertrepr_compare(config=config, op=op, left=left, right=right)
+                        Return value:.. None
+                    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\pluggy\_callers.py
+                    New var:....... res = None
+                    23:48:22.450482 line       104                     if res is not None:
+                    23:48:22.450482 line        71             for hook_impl in reversed(hook_impls):
+                    23:48:22.451985 line       112         if only_new_style_wrappers:
+                    23:48:22.451985 line       113             if firstresult:  # first result hooks return a single value
+                    23:48:22.451985 line       116                 result = results
+                    New var:....... result = []
+                    23:48:22.451985 line       119             for teardown in reversed(teardowns):
+                    23:48:22.451985 line       138             if exception is not None:
+                    23:48:22.452987 line       141                 return result
+                    23:48:22.452987 return     141                 return result
+                    Return value:.. []
+                Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\pluggy\_manager.py
+                23:48:22.452987 return     120         return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+                Return value:.. []
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\pluggy\_hooks.py
+            23:48:22.452987 return     513         return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+            Return value:.. []
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\__init__.py
+        New var:....... hook_result = []
+        23:48:22.453988 line       154         for new_expl in hook_result:
+        23:48:22.453988 line       162         return None
+        23:48:22.453988 return     162         return None
+        Return value:.. None
+    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+    New var:....... custom = None
+    23:48:22.454988 line       503         if custom is not None:
+    23:48:22.454988 line       505     return expl
+    23:48:22.454988 return     505     return expl
+    Return value:.. '%(py7)s\n{%(py7)s = %(py0)s(-%(py2)s, %(py5)s)\n} is %(py10)s'
+    Starting var:.. obj = <function sum_only_positive at 0x000001A88D432520>
+    23:48:22.454988 call       473 def _should_repr_global_name(obj: object) -> bool:
+    23:48:22.455987 line       474     if callable(obj):
+    23:48:22.455987 line       475         return False
+    23:48:22.455987 return     475         return False
+    Return value:.. False
+    Starting var:.. obj = 1
+    23:48:22.455987 call       420 def _saferepr(obj: object) -> str:
+    23:48:22.455987 line       430     if isinstance(obj, types.MethodType):
+    23:48:22.456988 line       434     maxsize = _get_maxsize_for_saferepr(util._config)
+        Starting var:.. config = <_pytest.config.Config object at 0x000001A88C6DB950>
+        23:48:22.456988 call       438 def _get_maxsize_for_saferepr(config: Config | None) -> int | None:
+        23:48:22.456988 line       440     if config is None:
+        23:48:22.456988 line       443         verbosity = config.get_verbosity(Config.VERBOSITY_ASSERTIONS)
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\config\__init__.py
+            Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+            Starting var:.. verbosity_type = 'assertions'
+            23:48:22.456988 call      1720     def get_verbosity(self, verbosity_type: str | None = None) -> int:
+            23:48:22.457987 line      1751         global_level = self.getoption("verbose", default=0)
+                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                Starting var:.. name = 'verbose'
+                Starting var:.. default = 0
+                Starting var:.. skip = False
+                23:48:22.457987 call      1682     def getoption(self, name: str, default=notset, skip: bool = False):
+                23:48:22.458988 line      1691         name = self._opt2dest.get(name, name)
+                23:48:22.458988 line      1692         try:
+                23:48:22.458988 line      1693             val = getattr(self.option, name)
+                New var:....... val = 0
+                23:48:22.458988 line      1694             if val is None and skip:
+                23:48:22.458988 line      1696             return val
+                23:48:22.458988 return    1696             return val
+                Return value:.. 0
+            New var:....... global_level = 0
+            23:48:22.459988 line      1752         assert isinstance(global_level, int)
+            23:48:22.459988 line      1753         if verbosity_type is None:
+            23:48:22.459988 line      1756         ini_name = Config._verbosity_ini_name(verbosity_type)
+                Starting var:.. verbosity_type = 'assertions'
+                23:48:22.459988 call      1767     def _verbosity_ini_name(verbosity_type: str) -> str:
+                23:48:22.459988 line      1768         return f"verbosity_{verbosity_type}"
+                23:48:22.460988 return    1768         return f"verbosity_{verbosity_type}"
+                Return value:.. 'verbosity_assertions'
+            New var:....... ini_name = 'verbosity_assertions'
+            23:48:22.460988 line      1757         if ini_name not in self._parser._inidict:
+            23:48:22.460988 line      1760         level = self.getini(ini_name)
+                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                Starting var:.. name = 'verbosity_assertions'
+                23:48:22.460988 call      1554     def getini(self, name: str):
+                23:48:22.461988 line      1582         try:
+                23:48:22.461988 line      1583             return self._inicache[name]
+                23:48:22.461988 return    1583             return self._inicache[name]
+                Return value:.. 'auto'
+            New var:....... level = 'auto'
+            23:48:22.461988 line      1761         if level == Config._VERBOSITY_INI_DEFAULT:
+            23:48:22.463040 line      1762             return global_level
+            23:48:22.463040 return    1762             return global_level
+            Return value:.. 0
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+        New var:....... verbosity = 0
+        23:48:22.463040 line       444     if verbosity >= 2:
+        23:48:22.463040 line       446     if verbosity >= 1:
+        23:48:22.463040 line       448     return DEFAULT_REPR_MAX_SIZE
+        23:48:22.464039 return     448     return DEFAULT_REPR_MAX_SIZE
+        Return value:.. 240
+    New var:....... maxsize = 240
+    23:48:22.464039 line       435     return saferepr(obj, maxsize=maxsize).replace("\n", "\\n")
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+        Starting var:.. obj = 1
+        Starting var:.. maxsize = 240
+        Starting var:.. use_ascii = False
+        23:48:22.464039 call        99 def saferepr(
+        23:48:22.465039 line       111     return SafeRepr(maxsize, use_ascii).repr(obj)
+            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450CE0>
+            Starting var:.. maxsize = 240
+            Starting var:.. use_ascii = False
+            Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+            23:48:22.465039 call        42     def __init__(self, maxsize: int | None, use_ascii: bool = False) -> None:
+            23:48:22.466040 line        49         super().__init__()
+                Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450CE0>
+                Starting var:.. maxlevel = 6
+                Starting var:.. maxtuple = 6
+                Starting var:.. maxlist = 6
+                Starting var:.. maxarray = 5
+                Starting var:.. maxdict = 4
+                Starting var:.. maxset = 6
+                Starting var:.. maxfrozenset = 6
+                Starting var:.. maxdeque = 6
+                Starting var:.. maxstring = 30
+                Starting var:.. maxlong = 40
+                Starting var:.. maxother = 30
+                Starting var:.. fillvalue = '...'
+                Starting var:.. indent = None
+                23:48:22.466040 call        39     def __init__(
+                23:48:22.468040 line        44         self.maxlevel = maxlevel
+                23:48:22.468040 line        45         self.maxtuple = maxtuple
+                23:48:22.469040 line        46         self.maxlist = maxlist
+                23:48:22.469040 line        47         self.maxarray = maxarray
+                23:48:22.469040 line        48         self.maxdict = maxdict
+                23:48:22.469040 line        49         self.maxset = maxset
+                23:48:22.469040 line        50         self.maxfrozenset = maxfrozenset
+                23:48:22.469040 line        51         self.maxdeque = maxdeque
+                23:48:22.469040 line        52         self.maxstring = maxstring
+                23:48:22.470039 line        53         self.maxlong = maxlong
+                23:48:22.470039 line        54         self.maxother = maxother
+                23:48:22.470039 line        55         self.fillvalue = fillvalue
+                23:48:22.470039 line        56         self.indent = indent
+                23:48:22.470039 return      56         self.indent = indent
+                Return value:.. None
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+            23:48:22.470039 line        53         self.maxstring = maxsize if maxsize is not None else 1_000_000_000
+            23:48:22.471039 line        54         self.maxsize = maxsize
+            23:48:22.471039 line        55         self.use_ascii = use_ascii
+            23:48:22.471039 return      55         self.use_ascii = use_ascii
+            Return value:.. None
+            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450CE0>
+            Starting var:.. x = 1
+            Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+            23:48:22.471039 call        57     def repr(self, x: object) -> str:
+            23:48:22.472040 line        58         try:
+            23:48:22.472040 line        59             if self.use_ascii:
+            23:48:22.472040 line        62                 s = super().repr(x)
+                Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450CE0>
+                Starting var:.. x = 1
+                23:48:22.472040 call        58     def repr(self, x):
+                23:48:22.473091 line        59         return self.repr1(x, self.maxlevel)
+                    Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450CE0>
+                    Starting var:.. x = 1
+                    Starting var:.. level = 6
+                    23:48:22.473091 call        61     def repr1(self, x, level):
+                    23:48:22.473091 line        62         typename = type(x).__name__
+                    New var:....... typename = 'int'
+                    23:48:22.473091 line        63         if ' ' in typename:
+                    23:48:22.474091 line        66         if hasattr(self, 'repr_' + typename):
+                    23:48:22.474091 line        67             return getattr(self, 'repr_' + typename)(x, level)
+                        Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D450CE0>
+                        Starting var:.. x = 1
+                        Starting var:.. level = 6
+                        23:48:22.474091 call       161     def repr_int(self, x, level):
+                        23:48:22.474091 line       162         s = builtins.repr(x) # XXX Hope this isn't too slow...
+                        New var:....... s = '1'
+                        23:48:22.475091 line       163         if len(s) > self.maxlong:
+                        23:48:22.475091 line       167         return s
+                        23:48:22.475091 return     167         return s
+                        Return value:.. '1'
+                    23:48:22.475091 return      67             return getattr(self, 'repr_' + typename)(x, level)
+                    Return value:.. '1'
+                23:48:22.475091 return      59         return self.repr1(x, self.maxlevel)
+                Return value:.. '1'
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+            New var:....... s = '1'
+            23:48:22.476092 line        67         if self.maxsize is not None:
+            23:48:22.476092 line        68             s = _ellipsize(s, self.maxsize)
+                Starting var:.. s = '1'
+                Starting var:.. maxsize = 240
+                23:48:22.476092 call        28 def _ellipsize(s: str, maxsize: int) -> str:
+                23:48:22.477091 line        29     if len(s) > maxsize:
+                23:48:22.477091 line        33     return s
+                23:48:22.477091 return      33     return s
+                Return value:.. '1'
+            23:48:22.477091 line        69         return s
+            23:48:22.477091 return      69         return s
+            Return value:.. '1'
+        23:48:22.478091 return     111     return SafeRepr(maxsize, use_ascii).repr(obj)
+        Return value:.. '1'
+    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+    23:48:22.478091 return     435     return saferepr(obj, maxsize=maxsize).replace("\n", "\\n")
+    Return value:.. '1'
+    Starting var:.. obj = 2
+    23:48:22.478091 call       420 def _saferepr(obj: object) -> str:
+    23:48:22.478091 line       430     if isinstance(obj, types.MethodType):
+    23:48:22.479092 line       434     maxsize = _get_maxsize_for_saferepr(util._config)
+        Starting var:.. config = <_pytest.config.Config object at 0x000001A88C6DB950>
+        23:48:22.479092 call       438 def _get_maxsize_for_saferepr(config: Config | None) -> int | None:
+        23:48:22.479092 line       440     if config is None:
+        23:48:22.479092 line       443         verbosity = config.get_verbosity(Config.VERBOSITY_ASSERTIONS)
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\config\__init__.py
+            Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+            Starting var:.. verbosity_type = 'assertions'
+            23:48:22.479092 call      1720     def get_verbosity(self, verbosity_type: str | None = None) -> int:
+            23:48:22.480091 line      1751         global_level = self.getoption("verbose", default=0)
+                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                Starting var:.. name = 'verbose'
+                Starting var:.. default = 0
+                Starting var:.. skip = False
+                23:48:22.480091 call      1682     def getoption(self, name: str, default=notset, skip: bool = False):
+                23:48:22.480091 line      1691         name = self._opt2dest.get(name, name)
+                23:48:22.481092 line      1692         try:
+                23:48:22.481092 line      1693             val = getattr(self.option, name)
+                New var:....... val = 0
+                23:48:22.481092 line      1694             if val is None and skip:
+                23:48:22.481092 line      1696             return val
+                23:48:22.481092 return    1696             return val
+                Return value:.. 0
+            New var:....... global_level = 0
+            23:48:22.482093 line      1752         assert isinstance(global_level, int)
+            23:48:22.482093 line      1753         if verbosity_type is None:
+            23:48:22.482093 line      1756         ini_name = Config._verbosity_ini_name(verbosity_type)
+                Starting var:.. verbosity_type = 'assertions'
+                23:48:22.482093 call      1767     def _verbosity_ini_name(verbosity_type: str) -> str:
+                23:48:22.483197 line      1768         return f"verbosity_{verbosity_type}"
+                23:48:22.483197 return    1768         return f"verbosity_{verbosity_type}"
+                Return value:.. 'verbosity_assertions'
+            New var:....... ini_name = 'verbosity_assertions'
+            23:48:22.483197 line      1757         if ini_name not in self._parser._inidict:
+            23:48:22.483197 line      1760         level = self.getini(ini_name)
+                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                Starting var:.. name = 'verbosity_assertions'
+                23:48:22.484196 call      1554     def getini(self, name: str):
+                23:48:22.484196 line      1582         try:
+                23:48:22.484196 line      1583             return self._inicache[name]
+                23:48:22.484196 return    1583             return self._inicache[name]
+                Return value:.. 'auto'
+            New var:....... level = 'auto'
+            23:48:22.485196 line      1761         if level == Config._VERBOSITY_INI_DEFAULT:
+            23:48:22.485196 line      1762             return global_level
+            23:48:22.485196 return    1762             return global_level
+            Return value:.. 0
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+        New var:....... verbosity = 0
+        23:48:22.485196 line       444     if verbosity >= 2:
+        23:48:22.486197 line       446     if verbosity >= 1:
+        23:48:22.486197 line       448     return DEFAULT_REPR_MAX_SIZE
+        23:48:22.486197 return     448     return DEFAULT_REPR_MAX_SIZE
+        Return value:.. 240
+    New var:....... maxsize = 240
+    23:48:22.486197 line       435     return saferepr(obj, maxsize=maxsize).replace("\n", "\\n")
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+        Starting var:.. obj = 2
+        Starting var:.. maxsize = 240
+        Starting var:.. use_ascii = False
+        23:48:22.486197 call        99 def saferepr(
+        23:48:22.487197 line       111     return SafeRepr(maxsize, use_ascii).repr(obj)
+            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+            Starting var:.. maxsize = 240
+            Starting var:.. use_ascii = False
+            Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+            23:48:22.487197 call        42     def __init__(self, maxsize: int | None, use_ascii: bool = False) -> None:
+            23:48:22.488196 line        49         super().__init__()
+                Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+                Starting var:.. maxlevel = 6
+                Starting var:.. maxtuple = 6
+                Starting var:.. maxlist = 6
+                Starting var:.. maxarray = 5
+                Starting var:.. maxdict = 4
+                Starting var:.. maxset = 6
+                Starting var:.. maxfrozenset = 6
+                Starting var:.. maxdeque = 6
+                Starting var:.. maxstring = 30
+                Starting var:.. maxlong = 40
+                Starting var:.. maxother = 30
+                Starting var:.. fillvalue = '...'
+                Starting var:.. indent = None
+                23:48:22.488196 call        39     def __init__(
+                23:48:22.490196 line        44         self.maxlevel = maxlevel
+                23:48:22.490196 line        45         self.maxtuple = maxtuple
+                23:48:22.490196 line        46         self.maxlist = maxlist
+                23:48:22.490196 line        47         self.maxarray = maxarray
+                23:48:22.491196 line        48         self.maxdict = maxdict
+                23:48:22.491196 line        49         self.maxset = maxset
+                23:48:22.491196 line        50         self.maxfrozenset = maxfrozenset
+                23:48:22.491196 line        51         self.maxdeque = maxdeque
+                23:48:22.491196 line        52         self.maxstring = maxstring
+                23:48:22.491196 line        53         self.maxlong = maxlong
+                23:48:22.491196 line        54         self.maxother = maxother
+                23:48:22.492197 line        55         self.fillvalue = fillvalue
+                23:48:22.492197 line        56         self.indent = indent
+                23:48:22.492197 return      56         self.indent = indent
+                Return value:.. None
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+            23:48:22.492197 line        53         self.maxstring = maxsize if maxsize is not None else 1_000_000_000
+            23:48:22.492197 line        54         self.maxsize = maxsize
+            23:48:22.492197 line        55         self.use_ascii = use_ascii
+            23:48:22.493218 return      55         self.use_ascii = use_ascii
+            Return value:.. None
+            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+            Starting var:.. x = 2
+            Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+            23:48:22.493218 call        57     def repr(self, x: object) -> str:
+            23:48:22.493218 line        58         try:
+            23:48:22.493218 line        59             if self.use_ascii:
+            23:48:22.494217 line        62                 s = super().repr(x)
+                Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+                Starting var:.. x = 2
+                23:48:22.494217 call        58     def repr(self, x):
+                23:48:22.494217 line        59         return self.repr1(x, self.maxlevel)
+                    Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+                    Starting var:.. x = 2
+                    Starting var:.. level = 6
+                    23:48:22.494217 call        61     def repr1(self, x, level):
+                    23:48:22.495217 line        62         typename = type(x).__name__
+                    New var:....... typename = 'int'
+                    23:48:22.495217 line        63         if ' ' in typename:
+                    23:48:22.495217 line        66         if hasattr(self, 'repr_' + typename):
+                    23:48:22.495217 line        67             return getattr(self, 'repr_' + typename)(x, level)
+                        Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+                        Starting var:.. x = 2
+                        Starting var:.. level = 6
+                        23:48:22.496217 call       161     def repr_int(self, x, level):
+                        23:48:22.496217 line       162         s = builtins.repr(x) # XXX Hope this isn't too slow...
+                        New var:....... s = '2'
+                        23:48:22.496217 line       163         if len(s) > self.maxlong:
+                        23:48:22.497218 line       167         return s
+                        23:48:22.497218 return     167         return s
+                        Return value:.. '2'
+                    23:48:22.497218 return      67             return getattr(self, 'repr_' + typename)(x, level)
+                    Return value:.. '2'
+                23:48:22.497218 return      59         return self.repr1(x, self.maxlevel)
+                Return value:.. '2'
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+            New var:....... s = '2'
+            23:48:22.498218 line        67         if self.maxsize is not None:
+            23:48:22.498218 line        68             s = _ellipsize(s, self.maxsize)
+                Starting var:.. s = '2'
+                Starting var:.. maxsize = 240
+                23:48:22.498218 call        28 def _ellipsize(s: str, maxsize: int) -> str:
+                23:48:22.499218 line        29     if len(s) > maxsize:
+                23:48:22.499218 line        33     return s
+                23:48:22.499218 return      33     return s
+                Return value:.. '2'
+            23:48:22.499218 line        69         return s
+            23:48:22.499218 return      69         return s
+            Return value:.. '2'
+        23:48:22.500218 return     111     return SafeRepr(maxsize, use_ascii).repr(obj)
+        Return value:.. '2'
+    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+    23:48:22.500218 return     435     return saferepr(obj, maxsize=maxsize).replace("\n", "\\n")
+    Return value:.. '2'
+    Starting var:.. obj = 2
+    23:48:22.500218 call       420 def _saferepr(obj: object) -> str:
+    23:48:22.500218 line       430     if isinstance(obj, types.MethodType):
+    23:48:22.501217 line       434     maxsize = _get_maxsize_for_saferepr(util._config)
+        Starting var:.. config = <_pytest.config.Config object at 0x000001A88C6DB950>
+        23:48:22.501217 call       438 def _get_maxsize_for_saferepr(config: Config | None) -> int | None:
+        23:48:22.501217 line       440     if config is None:
+        23:48:22.501217 line       443         verbosity = config.get_verbosity(Config.VERBOSITY_ASSERTIONS)
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\config\__init__.py
+            Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+            Starting var:.. verbosity_type = 'assertions'
+            23:48:22.501217 call      1720     def get_verbosity(self, verbosity_type: str | None = None) -> int:
+            23:48:22.502218 line      1751         global_level = self.getoption("verbose", default=0)
+                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                Starting var:.. name = 'verbose'
+                Starting var:.. default = 0
+                Starting var:.. skip = False
+                23:48:22.502218 call      1682     def getoption(self, name: str, default=notset, skip: bool = False):
+                23:48:22.503259 line      1691         name = self._opt2dest.get(name, name)
+                23:48:22.503259 line      1692         try:
+                23:48:22.503259 line      1693             val = getattr(self.option, name)
+                New var:....... val = 0
+                23:48:22.503259 line      1694             if val is None and skip:
+                23:48:22.503259 line      1696             return val
+                23:48:22.503259 return    1696             return val
+                Return value:.. 0
+            New var:....... global_level = 0
+            23:48:22.504259 line      1752         assert isinstance(global_level, int)
+            23:48:22.504259 line      1753         if verbosity_type is None:
+            23:48:22.504259 line      1756         ini_name = Config._verbosity_ini_name(verbosity_type)
+                Starting var:.. verbosity_type = 'assertions'
+                23:48:22.504259 call      1767     def _verbosity_ini_name(verbosity_type: str) -> str:
+                23:48:22.504259 line      1768         return f"verbosity_{verbosity_type}"
+                23:48:22.505259 return    1768         return f"verbosity_{verbosity_type}"
+                Return value:.. 'verbosity_assertions'
+            New var:....... ini_name = 'verbosity_assertions'
+            23:48:22.505259 line      1757         if ini_name not in self._parser._inidict:
+            23:48:22.505259 line      1760         level = self.getini(ini_name)
+                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                Starting var:.. name = 'verbosity_assertions'
+                23:48:22.505259 call      1554     def getini(self, name: str):
+                23:48:22.506260 line      1582         try:
+                23:48:22.506260 line      1583             return self._inicache[name]
+                23:48:22.506260 return    1583             return self._inicache[name]
+                Return value:.. 'auto'
+            New var:....... level = 'auto'
+            23:48:22.506260 line      1761         if level == Config._VERBOSITY_INI_DEFAULT:
+            23:48:22.506260 line      1762             return global_level
+            23:48:22.506260 return    1762             return global_level
+            Return value:.. 0
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+        New var:....... verbosity = 0
+        23:48:22.506260 line       444     if verbosity >= 2:
+        23:48:22.507763 line       446     if verbosity >= 1:
+        23:48:22.507763 line       448     return DEFAULT_REPR_MAX_SIZE
+        23:48:22.507763 return     448     return DEFAULT_REPR_MAX_SIZE
+        Return value:.. 240
+    New var:....... maxsize = 240
+    23:48:22.507763 line       435     return saferepr(obj, maxsize=maxsize).replace("\n", "\\n")
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+        Starting var:.. obj = 2
+        Starting var:.. maxsize = 240
+        Starting var:.. use_ascii = False
+        23:48:22.508767 call        99 def saferepr(
+        23:48:22.508767 line       111     return SafeRepr(maxsize, use_ascii).repr(obj)
+            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+            Starting var:.. maxsize = 240
+            Starting var:.. use_ascii = False
+            Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+            23:48:22.508767 call        42     def __init__(self, maxsize: int | None, use_ascii: bool = False) -> None:
+            23:48:22.509767 line        49         super().__init__()
+                Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+                Starting var:.. maxlevel = 6
+                Starting var:.. maxtuple = 6
+                Starting var:.. maxlist = 6
+                Starting var:.. maxarray = 5
+                Starting var:.. maxdict = 4
+                Starting var:.. maxset = 6
+                Starting var:.. maxfrozenset = 6
+                Starting var:.. maxdeque = 6
+                Starting var:.. maxstring = 30
+                Starting var:.. maxlong = 40
+                Starting var:.. maxother = 30
+                Starting var:.. fillvalue = '...'
+                Starting var:.. indent = None
+                23:48:22.509767 call        39     def __init__(
+                23:48:22.512269 line        44         self.maxlevel = maxlevel
+                23:48:22.512330 line        45         self.maxtuple = maxtuple
+                23:48:22.512330 line        46         self.maxlist = maxlist
+                23:48:22.512330 line        47         self.maxarray = maxarray
+                23:48:22.512330 line        48         self.maxdict = maxdict
+                23:48:22.512330 line        49         self.maxset = maxset
+                23:48:22.512330 line        50         self.maxfrozenset = maxfrozenset
+                23:48:22.513272 line        51         self.maxdeque = maxdeque
+                23:48:22.513272 line        52         self.maxstring = maxstring
+                23:48:22.513272 line        53         self.maxlong = maxlong
+                23:48:22.513272 line        54         self.maxother = maxother
+                23:48:22.513272 line        55         self.fillvalue = fillvalue
+                23:48:22.513272 line        56         self.indent = indent
+                23:48:22.513272 return      56         self.indent = indent
+                Return value:.. None
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+            23:48:22.514273 line        53         self.maxstring = maxsize if maxsize is not None else 1_000_000_000
+            23:48:22.514273 line        54         self.maxsize = maxsize
+            23:48:22.514273 line        55         self.use_ascii = use_ascii
+            23:48:22.514273 return      55         self.use_ascii = use_ascii
+            Return value:.. None
+            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+            Starting var:.. x = 2
+            Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+            23:48:22.514273 call        57     def repr(self, x: object) -> str:
+            23:48:22.515273 line        58         try:
+            23:48:22.515273 line        59             if self.use_ascii:
+            23:48:22.515273 line        62                 s = super().repr(x)
+                Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+                Starting var:.. x = 2
+                23:48:22.516274 call        58     def repr(self, x):
+                23:48:22.516274 line        59         return self.repr1(x, self.maxlevel)
+                    Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+                    Starting var:.. x = 2
+                    Starting var:.. level = 6
+                    23:48:22.516274 call        61     def repr1(self, x, level):
+                    23:48:22.517272 line        62         typename = type(x).__name__
+                    New var:....... typename = 'int'
+                    23:48:22.517272 line        63         if ' ' in typename:
+                    23:48:22.517272 line        66         if hasattr(self, 'repr_' + typename):
+                    23:48:22.518272 line        67             return getattr(self, 'repr_' + typename)(x, level)
+                        Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88D173B00>
+                        Starting var:.. x = 2
+                        Starting var:.. level = 6
+                        23:48:22.518272 call       161     def repr_int(self, x, level):
+                        23:48:22.518272 line       162         s = builtins.repr(x) # XXX Hope this isn't too slow...
+                        New var:....... s = '2'
+                        23:48:22.518272 line       163         if len(s) > self.maxlong:
+                        23:48:22.519273 line       167         return s
+                        23:48:22.519273 return     167         return s
+                        Return value:.. '2'
+                    23:48:22.519273 return      67             return getattr(self, 'repr_' + typename)(x, level)
+                    Return value:.. '2'
+                23:48:22.519273 return      59         return self.repr1(x, self.maxlevel)
+                Return value:.. '2'
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+            New var:....... s = '2'
+            23:48:22.520272 line        67         if self.maxsize is not None:
+            23:48:22.520272 line        68             s = _ellipsize(s, self.maxsize)
+                Starting var:.. s = '2'
+                Starting var:.. maxsize = 240
+                23:48:22.520272 call        28 def _ellipsize(s: str, maxsize: int) -> str:
+                23:48:22.521272 line        29     if len(s) > maxsize:
+                23:48:22.521272 line        33     return s
+                23:48:22.521272 return      33     return s
+                Return value:.. '2'
+            23:48:22.521272 line        69         return s
+            23:48:22.521272 return      69         return s
+            Return value:.. '2'
+        23:48:22.522272 return     111     return SafeRepr(maxsize, use_ascii).repr(obj)
+        Return value:.. '2'
+    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+    23:48:22.522272 return     435     return saferepr(obj, maxsize=maxsize).replace("\n", "\\n")
+    Return value:.. '2'
+    Starting var:.. obj = None
+    23:48:22.522272 call       420 def _saferepr(obj: object) -> str:
+    23:48:22.522272 line       430     if isinstance(obj, types.MethodType):
+    23:48:22.523296 line       434     maxsize = _get_maxsize_for_saferepr(util._config)
+        Starting var:.. config = <_pytest.config.Config object at 0x000001A88C6DB950>
+        23:48:22.523296 call       438 def _get_maxsize_for_saferepr(config: Config | None) -> int | None:
+        23:48:22.523296 line       440     if config is None:
+        23:48:22.523296 line       443         verbosity = config.get_verbosity(Config.VERBOSITY_ASSERTIONS)
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\config\__init__.py
+            Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+            Starting var:.. verbosity_type = 'assertions'
+            23:48:22.523296 call      1720     def get_verbosity(self, verbosity_type: str | None = None) -> int:
+            23:48:22.524295 line      1751         global_level = self.getoption("verbose", default=0)
+                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                Starting var:.. name = 'verbose'
+                Starting var:.. default = 0
+                Starting var:.. skip = False
+                23:48:22.524295 call      1682     def getoption(self, name: str, default=notset, skip: bool = False):
+                23:48:22.525295 line      1691         name = self._opt2dest.get(name, name)
+                23:48:22.525295 line      1692         try:
+                23:48:22.525295 line      1693             val = getattr(self.option, name)
+                New var:....... val = 0
+                23:48:22.525295 line      1694             if val is None and skip:
+                23:48:22.525295 line      1696             return val
+                23:48:22.525295 return    1696             return val
+                Return value:.. 0
+            New var:....... global_level = 0
+            23:48:22.526296 line      1752         assert isinstance(global_level, int)
+            23:48:22.526296 line      1753         if verbosity_type is None:
+            23:48:22.526296 line      1756         ini_name = Config._verbosity_ini_name(verbosity_type)
+                Starting var:.. verbosity_type = 'assertions'
+                23:48:22.526296 call      1767     def _verbosity_ini_name(verbosity_type: str) -> str:
+                23:48:22.526296 line      1768         return f"verbosity_{verbosity_type}"
+                23:48:22.527296 return    1768         return f"verbosity_{verbosity_type}"
+                Return value:.. 'verbosity_assertions'
+            New var:....... ini_name = 'verbosity_assertions'
+            23:48:22.527296 line      1757         if ini_name not in self._parser._inidict:
+            23:48:22.527296 line      1760         level = self.getini(ini_name)
+                Starting var:.. self = <_pytest.config.Config object at 0x000001A88C6DB950>
+                Starting var:.. name = 'verbosity_assertions'
+                23:48:22.527296 call      1554     def getini(self, name: str):
+                23:48:22.528295 line      1582         try:
+                23:48:22.528295 line      1583             return self._inicache[name]
+                23:48:22.528295 return    1583             return self._inicache[name]
+                Return value:.. 'auto'
+            New var:....... level = 'auto'
+            23:48:22.528295 line      1761         if level == Config._VERBOSITY_INI_DEFAULT:
+            23:48:22.529295 line      1762             return global_level
+            23:48:22.529295 return    1762             return global_level
+            Return value:.. 0
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+        New var:....... verbosity = 0
+        23:48:22.529295 line       444     if verbosity >= 2:
+        23:48:22.529295 line       446     if verbosity >= 1:
+        23:48:22.529295 line       448     return DEFAULT_REPR_MAX_SIZE
+        23:48:22.530295 return     448     return DEFAULT_REPR_MAX_SIZE
+        Return value:.. 240
+    New var:....... maxsize = 240
+    23:48:22.530295 line       435     return saferepr(obj, maxsize=maxsize).replace("\n", "\\n")
+        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+        Starting var:.. obj = None
+        Starting var:.. maxsize = 240
+        Starting var:.. use_ascii = False
+        23:48:22.530295 call        99 def saferepr(
+        23:48:22.531296 line       111     return SafeRepr(maxsize, use_ascii).repr(obj)
+            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88C7AB6E0>
+            Starting var:.. maxsize = 240
+            Starting var:.. use_ascii = False
+            Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+            23:48:22.531296 call        42     def __init__(self, maxsize: int | None, use_ascii: bool = False) -> None:
+            23:48:22.532296 line        49         super().__init__()
+                Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88C7AB6E0>
+                Starting var:.. maxlevel = 6
+                Starting var:.. maxtuple = 6
+                Starting var:.. maxlist = 6
+                Starting var:.. maxarray = 5
+                Starting var:.. maxdict = 4
+                Starting var:.. maxset = 6
+                Starting var:.. maxfrozenset = 6
+                Starting var:.. maxdeque = 6
+                Starting var:.. maxstring = 30
+                Starting var:.. maxlong = 40
+                Starting var:.. maxother = 30
+                Starting var:.. fillvalue = '...'
+                Starting var:.. indent = None
+                23:48:22.532296 call        39     def __init__(
+                23:48:22.534784 line        44         self.maxlevel = maxlevel
+                23:48:22.534784 line        45         self.maxtuple = maxtuple
+                23:48:22.534784 line        46         self.maxlist = maxlist
+                23:48:22.534784 line        47         self.maxarray = maxarray
+                23:48:22.534784 line        48         self.maxdict = maxdict
+                23:48:22.535824 line        49         self.maxset = maxset
+                23:48:22.535824 line        50         self.maxfrozenset = maxfrozenset
+                23:48:22.535824 line        51         self.maxdeque = maxdeque
+                23:48:22.535824 line        52         self.maxstring = maxstring
+                23:48:22.535824 line        53         self.maxlong = maxlong
+                23:48:22.535824 line        54         self.maxother = maxother
+                23:48:22.535824 line        55         self.fillvalue = fillvalue
+                23:48:22.536827 line        56         self.indent = indent
+                23:48:22.536827 return      56         self.indent = indent
+                Return value:.. None
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+            23:48:22.536827 line        53         self.maxstring = maxsize if maxsize is not None else 1_000_000_000
+            23:48:22.536827 line        54         self.maxsize = maxsize
+            23:48:22.536827 line        55         self.use_ascii = use_ascii
+            23:48:22.536827 return      55         self.use_ascii = use_ascii
+            Return value:.. None
+            Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88C7AB6E0>
+            Starting var:.. x = None
+            Starting var:.. __class__ = <class '_pytest._io.saferepr.SafeRepr'>
+            23:48:22.536827 call        57     def repr(self, x: object) -> str:
+            23:48:22.537836 line        58         try:
+            23:48:22.537836 line        59             if self.use_ascii:
+            23:48:22.537836 line        62                 s = super().repr(x)
+                Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88C7AB6E0>
+                Starting var:.. x = None
+                23:48:22.537836 call        58     def repr(self, x):
+                23:48:22.538827 line        59         return self.repr1(x, self.maxlevel)
+                    Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88C7AB6E0>
+                    Starting var:.. x = None
+                    Starting var:.. level = 6
+                    23:48:22.538827 call        61     def repr1(self, x, level):
+                    23:48:22.539835 line        62         typename = type(x).__name__
+                    New var:....... typename = 'NoneType'
+                    23:48:22.539835 line        63         if ' ' in typename:
+                    23:48:22.539835 line        66         if hasattr(self, 'repr_' + typename):
+                    23:48:22.539835 line        69             return self.repr_instance(x, level)
+                        Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+                        Starting var:.. self = <_pytest._io.saferepr.SafeRepr object at 0x000001A88C7AB6E0>
+                        Starting var:.. x = None
+                        Starting var:.. level = 6
+                        23:48:22.539835 call        71     def repr_instance(self, x: object, level: int) -> str:
+                        23:48:22.540829 line        72         try:
+                        23:48:22.540829 line        73             s = repr(x)
+                        New var:....... s = 'None'
+                        23:48:22.540829 line        78         if self.maxsize is not None:
+                        23:48:22.540829 line        79             s = _ellipsize(s, self.maxsize)
+                            Starting var:.. s = 'None'
+                            Starting var:.. maxsize = 240
+                            23:48:22.540829 call        28 def _ellipsize(s: str, maxsize: int) -> str:
+                            23:48:22.540829 line        29     if len(s) > maxsize:
+                            23:48:22.542374 line        33     return s
+                            23:48:22.542374 return      33     return s
+                            Return value:.. 'None'
+                        23:48:22.542374 line        80         return s
+                        23:48:22.542374 return      80         return s
+                        Return value:.. 'None'
+                    Source path:... C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.1776.0_x64__qbz5n2kfra8p0\Lib\reprlib.py
+                    23:48:22.543419 return      69             return self.repr_instance(x, level)
+                    Return value:.. 'None'
+                23:48:22.543419 return      59         return self.repr1(x, self.maxlevel)
+                Return value:.. 'None'
+            Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\_io\saferepr.py
+            New var:....... s = 'None'
+            23:48:22.543419 line        67         if self.maxsize is not None:
+            23:48:22.544413 line        68             s = _ellipsize(s, self.maxsize)
+                Starting var:.. s = 'None'
+                Starting var:.. maxsize = 240
+                23:48:22.544413 call        28 def _ellipsize(s: str, maxsize: int) -> str:
+                23:48:22.544413 line        29     if len(s) > maxsize:
+                23:48:22.544413 line        33     return s
+                23:48:22.544413 return      33     return s
+                Return value:.. 'None'
+            23:48:22.545436 line        69         return s
+            23:48:22.545436 return      69         return s
+            Return value:.. 'None'
+        23:48:22.545436 return     111     return SafeRepr(maxsize, use_ascii).repr(obj)
+        Return value:.. 'None'
+    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\rewrite.py
+    23:48:22.545436 return     435     return saferepr(obj, maxsize=maxsize).replace("\n", "\\n")
+    Return value:.. 'None'
+    Source path:... C:\Users\franc\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\_pytest\assertion\util.py
+    Starting var:.. explanation = 'assert 2\n{2 = sum_only_positive(-1, 2)\n} is None'
+    23:48:22.546436 call        46 def format_explanation(explanation: str) -> str:
+    23:48:22.546436 line        56     lines = _split_explanation(explanation)
+        Starting var:.. explanation = 'assert 2\n{2 = sum_only_positive(-1, 2)\n} is None'
+        23:48:22.546436 call        61 def _split_explanation(explanation: str) -> list[str]:
+        23:48:22.547442 line        68     raw_lines = (explanation or "").split("\n")
+        New var:....... raw_lines = ['assert 2', '{2 = sum_only_positive(-1, 2)', '} is None']
+        23:48:22.547442 line        69     lines = [raw_lines[0]]
+        New var:....... lines = ['assert 2']
+        23:48:22.547442 line        70     for values in raw_lines[1:]:
+        New var:....... values = '{2 = sum_only_positive(-1, 2)'
+        23:48:22.547442 line        71         if values and values[0] in ["{", "}", "~", ">"]:
+        23:48:22.548413 line        72             lines.append(values)
+        Modified var:.. lines = ['assert 2', '{2 = sum_only_positive(-1, 2)']
+        23:48:22.548413 line        70     for values in raw_lines[1:]:
+        Modified var:.. values = '} is None'
+        23:48:22.548413 line        71         if values and values[0] in ["{", "}", "~", ">"]:
+        23:48:22.549414 line        72             lines.append(values)
+        Modified var:.. lines = ['assert 2', '{2 = sum_only_positive(-1, 2)', '} is None']
+        23:48:22.549414 line        70     for values in raw_lines[1:]:
+        23:48:22.549414 line        75     return lines
+        23:48:22.549414 return      75     return lines
+        Return value:.. ['assert 2', '{2 = sum_only_positive(-1, 2)', '} is None']
+    New var:....... lines = ['assert 2', '{2 = sum_only_positive(-1, 2)', '} is None']
+    23:48:22.550406 line        57     result = _format_lines(lines)
+        Starting var:.. lines = ['assert 2', '{2 = sum_only_positive(-1, 2)', '} is None']
+        23:48:22.550406 call        78 def _format_lines(lines: Sequence[str]) -> list[str]:
+        23:48:22.550406 line        87     result = list(lines[:1])
+        New var:....... result = ['assert 2']
+        23:48:22.550406 line        88     stack = [0]
+        New var:....... stack = [0]
+        23:48:22.550406 line        89     stackcnt = [0]
+        New var:....... stackcnt = [0]
+        23:48:22.551414 line        90     for line in lines[1:]:
+        New var:....... line = '{2 = sum_only_positive(-1, 2)'
+        23:48:22.551414 line        91         if line.startswith("{"):
+        23:48:22.551414 line        92             if stackcnt[-1]:
+        23:48:22.551414 line        95                 s = "where "
+        New var:....... s = 'where '
+        23:48:22.552405 line        96             stack.append(len(result))
+        Modified var:.. stack = [0, 1]
+        23:48:22.552405 line        97             stackcnt[-1] += 1
+        Modified var:.. stackcnt = [1]
+        23:48:22.552949 line        98             stackcnt.append(0)
+        Modified var:.. stackcnt = [1, 0]
+        23:48:22.552949 line        99             result.append(" +" + "  " * (len(stack) - 1) + s + line[1:])
+        Modified var:.. result = ['assert 2', ' +  where 2 = sum_only_positive(-1, 2)']
+        23:48:22.552949 line        90     for line in lines[1:]:
+        Modified var:.. line = '} is None'
+        23:48:22.552949 line        91         if line.startswith("{"):
+        23:48:22.553989 line       100         elif line.startswith("}"):
+        23:48:22.553989 line       101             stack.pop()
+        Modified var:.. stack = [0]
+        23:48:22.553989 line       102             stackcnt.pop()
+        Modified var:.. stackcnt = [1]
+        23:48:22.553989 line       103             result[stack[-1]] += line[1:]
+        Modified var:.. result = ['assert 2 is None', ' +  where 2 = sum_only_positive(-1, 2)']
+        23:48:22.554987 line        90     for line in lines[1:]:
+        23:48:22.554987 line       109     assert len(stack) == 1
+        23:48:22.554987 line       110     return result
+        23:48:22.554987 return     110     return result
+        Return value:.. ['assert 2 is None', ' +  where 2 = sum_only_positive(-1, 2)']
+    New var:....... result = ['assert 2 is None', ' +  where 2 = sum_only_positive(-1, 2)']
+    23:48:22.554987 line        58     return "\n".join(result)
+    23:48:22.554987 return      58     return "\n".join(result)
+    Return value:.. 'assert 2 is None\n +  where 2 = sum_only_positive(-1, 2)'
+Source path:... C:\Users\franc\Documents\Python Scripts\Coverage test\test.py
+New var:....... @py_assert1 = 1
+New var:....... @py_assert3 = -1
+New var:....... @py_assert4 = 2
+New var:....... @py_assert6 = 2
+New var:....... @py_assert9 = None
+New var:....... @py_assert8 = False
+New var:....... @py_format11 = '2\n{2 = sum_only_positive(-1, 2)\n} is None'
+New var:....... @py_format13 = 'assert 2\n{2 = sum_only_positive(-1, 2)\n} is None'
+23:48:22.555981 exception   14     assert sum_only_positive(-1, 2) is None
+Exception:..... AssertionError: assert 2 is None
+ +  where 2 = sum_only_positive(-1, 2)
+Call ended by exception
+Elapsed time: 00:00:00.180158
