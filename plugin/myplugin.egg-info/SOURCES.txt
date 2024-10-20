@@ -1,0 +1,8 @@
+setup.py
+myplugin/__init__.py
+myplugin/plugin_module.py
+myplugin.egg-info/PKG-INFO
+myplugin.egg-info/SOURCES.txt
+myplugin.egg-info/dependency_links.txt
+myplugin.egg-info/entry_points.txt
+myplugin.egg-info/top_level.txt
