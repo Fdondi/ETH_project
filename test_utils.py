@@ -15,7 +15,7 @@ def extract_test_files(test_lines: List[str]) -> Set[str]:
         tests.add(file)
     return tests
 
-def collect_tests(output_file, pytest_args, test_estimate: int) -> Set[str]:
+def collect_tests(pytest_args, test_estimate: int) -> Set[str]:
     # Construct the pytest command
     pytest_command = ['python', '-m', 'pytest', '--collect-only', '--quiet'] + pytest_args
 
@@ -31,7 +31,8 @@ def collect_tests(output_file, pytest_args, test_estimate: int) -> Set[str]:
         # Read each line of stdout in real-time
         for line in proc.stdout:
             test_lines.append(line)
-            if "PASSED" in line or "FAILED" in line:
+            if "::" in line:
+                print("Saved line: " + line)
                 progress.update(1)  # Update for each test result line
 
         # Capture and save any errors

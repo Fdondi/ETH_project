@@ -20,7 +20,6 @@ def process_repo(repo_name: str):
 
     data_path = Path('data', repo_name)
 
-    test_file_path = Path('test_files.json')
     # point pytest to the repo
     pytest_args = ['--continue-on-collection-errors', '-p myplugin', '--rootdir', repo_path, repo_path]
 
@@ -42,11 +41,11 @@ def process_repo(repo_name: str):
         print(f"Processing commit {commit.id} (at {datetime.fromtimestamp(commit.commit_time)})")
 
         diff = repo.diff(commit, next_commit)
-        new_files = [delta.new_file.path for delta in diff.deltas if delta.status == pygit2.GIT_DELTA_ADDED]
-        if new_files or remaining_before_test_discovery <= 0:
-            n_test_estimate = 0.9 * len(test_files) + 0.5 * len(new_files)
-            print(f"Renewing test discovery as files {new_files} were added; expecting {n_test_estimate} tests")
-            test_files = collect_tests(test_file_path, pytest_args, n_test_estimate)
+        new_py_files = [delta.new_file.path for delta in diff.deltas if delta.status == pygit2.GIT_DELTA_ADDED and delta.new_file.path.endswith('.py')]
+        if new_py_files or remaining_before_test_discovery <= 0:
+            n_test_estimate = 0.9 * len(test_files) + 0.5 * len(new_py_files)
+            print(f"Renewing test discovery as files {new_py_files} were added; expecting {n_test_estimate} tests")
+            test_files = collect_tests(pytest_args, n_test_estimate)
             print(f"Discovered {len(test_files)} tests")
             remaining_before_test_discovery = max_test_discovery_interval
 
@@ -68,7 +67,7 @@ def process_repo(repo_name: str):
         print(f"Running tests on parent: {commit.id} ({datetime.fromtimestamp(commit.commit_time)})")
         pytest.main(pytest_args)
 
-        data_path_commit = data_path.joinpath(commit.id)
+        data_path_commit = data_path.joinpath(f'{commit.id}')
         
         if Path('result.json').exists():
             data_path_commit.mkdir(parents=True, exist_ok=True)

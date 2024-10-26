@@ -20,7 +20,7 @@ interesting_lines = {filename: set(lines) for filename, lines in interesting_lin
 print("Conftest.py has interesting files: ", interesting_lines.keys())
 
 # indexed by file first, then line number
-file_info = defaultdict(lambda: defaultdict(List[dict]))
+file_info = defaultdict(lambda: defaultdict(list))
 
 """
 def pytest_collection_modifyitems(items):
@@ -68,6 +68,7 @@ def trace_function(frame, event, arg):
     for file, lines  in interesting_lines.items():
         if file_path.match(file) and lineno in lines:
             local_vars = { var_name: represent_variable(var_name, var_value, is_init) for var_name, var_value in frame.f_locals.items() }
+            print(f"Found {filename}:{lineno} {code.co_name} {local_vars}")
             with lock:
                 file_info[filename][lineno].append(local_vars)
 
@@ -82,7 +83,7 @@ def pytest_sessionfinish(session, exitstatus):
     sys.settrace(None)
     threading.settrace(None)
     print("Tracing stopped.")
-    process_tracing_data()
+    process_tracing_data(debug = True)
 
 def process_tracing_data(debug = False):
     # save result to a file
@@ -90,10 +91,11 @@ def process_tracing_data(debug = False):
         json.dump(file_info, f)
     # debug print
     if debug:
+        print("Tracing result:")
         for file, file_data in file_info.items():
             print(f"File: {file}")
-            for i, line in enumerate(file_data):
-                print(f"Line {i+1}: {line['line']} executed {len(line['vars'])} times")
-                for vars in line['vars']:
-                    print(vars)
+            for line_no, line_vars in enumerate(file_data):
+                print(f"Line {line_no}: executed {len(line_vars)} times")
+                for var in line_vars:
+                    print(var)
                 print("")
