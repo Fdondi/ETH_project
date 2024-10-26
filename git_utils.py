@@ -1,7 +1,7 @@
 from collections import defaultdict
 from datetime import datetime
 import pdb
-from typing import Dict, Generator, List, Tuple
+from typing import Dict, Generator, List, Tuple, Set
 from pygit2 import GIT_SORT_TIME, GIT_SORT_TOPOLOGICAL, Repository, Walker
 from itertools import islice
 
@@ -9,13 +9,11 @@ from itertools import islice
 def get_all_commits(repo: Repository) -> Walker:
     return repo.walk(repo.head.target, GIT_SORT_TIME | GIT_SORT_TOPOLOGICAL)
 
-def is_test_file(file_path):
-    return 'test' in file_path or file_path.startswith('tests/')
 
 def skip_first(iterable):
     return islice(iterable, 1, None)
 
-def modifies_test_and_code(patches, test_files: List[str]) -> bool:    
+def modifies_test_and_code(patches, test_files: Set[str]) -> bool:
     commit_modifies_test = False
     commit_modifies_code = False
     print('test_files:', test_files)

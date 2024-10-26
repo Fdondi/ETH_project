@@ -2,16 +2,16 @@
 import json
 import linecache
 import os
+import pickle
 import sys
 import threading
 from collections import Counter, defaultdict
 from pathlib import Path
+from typing import List
 
 import pytest
 
 lock = threading.Lock()
-
-src_root = os.path.join(os.getcwd(),"src")
 
 interesting_lines_list = json.load(open("to_track.json"))
 # convert to set for faster lookup
@@ -20,9 +20,9 @@ interesting_lines = {filename: set(lines) for filename, lines in interesting_lin
 print("Conftest.py has interesting files: ", interesting_lines.keys())
 
 # indexed by file first, then line number
-file_info = defaultdict(lambda: defaultdict(dict))
+file_info = defaultdict(lambda: defaultdict(List[dict]))
 
-
+"""
 def pytest_collection_modifyitems(items):
     for item in items:
         # Convert the item nodeid (which contains the full test path) to a Path object
@@ -37,6 +37,16 @@ def pytest_collection_modifyitems(items):
         # set timeout if not already set or if the current timeout is significantly different from the target timeout
         if current_timeout is None or abs(current_timeout.args[0] - target_timeout) / target_timeout > 0.5:
             item.add_marker(pytest.mark.timeout(target_timeout))
+"""
+
+def represent_variable(var_name, var_value, is_init: bool):
+    # Special handling for 'self' to check if it's partially initialized
+    if is_init and var_name == 'self':
+        return "<partially initialized object>"
+    try:
+        return repr(var_value)
+    except Exception as e:
+        return "<unrepresentable object> (error: {e})"
 
 
 def trace_function(frame, event, arg):
@@ -45,24 +55,21 @@ def trace_function(frame, event, arg):
     
     # Only trace your application code
     code = frame.f_code
-    filename = code.co_filename
-    if not filename.startswith(src_root):
-        return trace_function
     # also filter function=<module> which is the main function
     if code.co_name == "<module>":
         return trace_function
-    if not filename in interesting_lines:
-        return trace_function
-    
-    #function_name = code.co_name
+
+    filename = code.co_filename
+    file_path = Path(filename)
     lineno = frame.f_lineno
-    if lineno not in interesting_lines[filename]:
-        return trace_function
 
-    local_vars = frame.f_locals.copy()
+    is_init = event == 'call' and code.co_name == '__init__'
 
-    with lock:
-        file_info[filename][lineno] = local_vars
+    for file, lines  in interesting_lines.items():
+        if file_path.match(file) and lineno in lines:
+            local_vars = { var_name: represent_variable(var_name, var_value, is_init) for var_name, var_value in frame.f_locals.items() }
+            with lock:
+                file_info[filename][lineno].append(local_vars)
 
     return trace_function
 

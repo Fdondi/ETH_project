@@ -1,7 +1,9 @@
 data
 cache_directory
-__pycache__/*
+__pycache__/** */
+**/__pycache__/*
 result.json
 test_files.json
 to_track.json
-Repos/*
+Repos/**
+*.jpg

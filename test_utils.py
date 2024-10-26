@@ -2,48 +2,51 @@ from collections import defaultdict
 from pathlib import Path
 import subprocess
 import os
-from typing import Dict, List
+from typing import Dict, List, Set
 
-def get_test_names(test_file_path: Path) -> Dict:
-    tests = defaultdict(list)
-    with open(test_file_path, 'r') as f:
-        for line in f:
-            if '::' not in line:
-                continue
-            file, test = line.split('::', 1)
-            tests[file].append(test)
+from tqdm import tqdm
+
+def extract_test_files(test_lines: List[str]) -> Set[str]:
+    tests = set()
+    for line in test_lines:
+        if '::' not in line:
+            continue
+        file, _ = line.split('::', 1)
+        tests.add(file)
     return tests
 
-def get_test_files(test_file_path: Path) -> List:
-    tests = set()
-    with open(test_file_path, 'r') as f:
-        for line in f:
-            if '::' not in line:
-                continue
-            file, _ = line.split('::', 1)
-            tests.add(file)
-    return list(tests)
-
-def collect_tests(output_file, pytest_args):
+def collect_tests(output_file, pytest_args, test_estimate: int) -> Set[str]:
     # Construct the pytest command
     pytest_command = ['python', '-m', 'pytest', '--collect-only', '--quiet'] + pytest_args
 
-    # Open the output file and run pytest
-    with open(output_file, 'w') as f:
-        result = subprocess.run(
-            pytest_command,
-            stdout=f,  # Redirect stdout to the output file
-            stderr=subprocess.PIPE  # Capture stderr separately
-        )
-        # Print stderr to actual stdout
-        if result.stderr:
-            print(result.stderr.decode())
+    test_lines = []
 
-    # Check if pytest ran successfully
-    if result.returncode != 0:
-        print(f"Pytest encountered errors. Check {output_file} for details.")
-    else:
-        print(f"Pytest collection completed successfully. Output saved to {output_file}.")
+    # Open the output file and run pytest
+    with subprocess.Popen(
+        pytest_command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    ) as proc, tqdm(unit="test", desc="Collecting Tests", total = test_estimate) as progress:
+        # Read each line of stdout in real-time
+        for line in proc.stdout:
+            test_lines.append(line)
+            if "PASSED" in line or "FAILED" in line:
+                progress.update(1)  # Update for each test result line
+
+        # Capture and save any errors
+        stderr_output = proc.stderr.read()
+        if stderr_output:
+            print("ERROR: " + stderr_output)
+
+        # Check if pytest ran successfully
+        proc_returncode = proc.wait()
+        if proc_returncode != 0:
+            print(f"Pytest encountered errors. See above for details.")
+        else:
+            print(f"Pytest collection completed successfully.")
+
+    return extract_test_files(test_lines)
 
 
 
