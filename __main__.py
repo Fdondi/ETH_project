@@ -10,26 +10,40 @@ from pathlib import Path
 from git_utils import get_all_commits, get_modified_lines, modifies_test_and_code
 from test_utils import collect_tests
 
-def process_repo(repo_name: str):
+def my_checkout(repo, commit):
+    # Reset index and working directory to the target commit
+    repo.reset(commit.id, pygit2.GIT_RESET_HARD)
+    # Perform the forced checkout
+    repo.checkout_tree(commit.tree, strategy=pygit2.GIT_CHECKOUT_FORCE)
+    # Update HEAD to point to the new commit
+    repo.set_head(commit.id)
+
+def process_repo(repo_name: str, skip_existing = True, start_at = 0):
 
     repo_path = Path('Repos',repo_name, "code")
     if not os.path.exists(repo_path):
         raise ValueError(f"Directory {repo_path} does not exist")
 
     repo = pygit2.Repository(repo_path)
+    main_branch = repo.branches['main']
+    # Check out the latest commit on main and reset to it
+    repo.checkout(main_branch.name)
+    main_commit = main_branch.peel()
+    my_checkout(repo, main_commit)
 
     data_path = Path('data', repo_name)
 
     # point pytest to the repo
-    pytest_args = ['--continue-on-collection-errors', '-p myplugin', '--rootdir', repo_path, repo_path]
+    pytest_args = ['--continue-on-collection-errors', '--rootdir', str(repo_path), str(repo_path)]
+    pytest_args_run = ['-p myplugin'] + pytest_args
 
     commit_walker = get_all_commits(repo)
 
     # first commit
     commit = next(commit_walker)
 
-    repo.checkout_tree(commit.tree)
-    repo.set_head(commit.id)
+    print(f"Processing repo {repo_name} starting with {commit}  (at {datetime.fromtimestamp(commit.commit_time)})")
+    my_checkout(repo, commit)
 
     test_files = set()
 
@@ -38,7 +52,18 @@ def process_repo(repo_name: str):
     max_test_discovery_interval = 10
 
     for next_commit in commit_walker:
+        if commit.commit_time < start_at:
+            commit = next_commit
+            continue
+
         print(f"Processing commit {commit.id} (at {datetime.fromtimestamp(commit.commit_time)})")
+
+        data_path_commit = data_path.joinpath(f'{commit.id}')
+
+        if skip_existing and data_path_commit.exists():
+            print(f"Data for commit {commit.id} already exists; skipping")
+            commit = next_commit
+            continue
 
         diff = repo.diff(commit, next_commit)
         new_py_files = [delta.new_file.path for delta in diff.deltas if delta.status == pygit2.GIT_DELTA_ADDED and delta.new_file.path.endswith('.py')]
@@ -65,9 +90,7 @@ def process_repo(repo_name: str):
         # Run pytest on parent commit
         # note we might have run on this commit already; but we have now new modified functions!
         print(f"Running tests on parent: {commit.id} ({datetime.fromtimestamp(commit.commit_time)})")
-        pytest.main(pytest_args)
-
-        data_path_commit = data_path.joinpath(f'{commit.id}')
+        pytest.main(pytest_args_run)
         
         if Path('result.json').exists():
             data_path_commit.mkdir(parents=True, exist_ok=True)
@@ -79,14 +102,13 @@ def process_repo(repo_name: str):
         commit = next_commit
 
         # Run pytest on current commit
-        repo.checkout_tree(commit.tree)
-        repo.set_head(commit.id)
+        my_checkout(repo, commit)
 
         with open('to_track.json', 'w') as f:
             json.dump(modified_lines["new"], f)
 
         print(f"Running tests on new commit {commit.id} ({datetime.fromtimestamp(commit.commit_time)})")
-        pytest.main(pytest_args)
+        pytest.main(pytest_args_run)
 
         if Path('result.json').exists():
             data_path_commit.mkdir(parents=True, exist_ok=True)
@@ -96,4 +118,4 @@ def process_repo(repo_name: str):
 
 
 if __name__ == "__main__":
-    process_repo('requests')
+    process_repo('requests', start_at=datetime(2024, 1, 1).timestamp())

@@ -1,23 +1,13 @@
 # conftest.py
 import json
-import linecache
-import os
-import pickle
 import sys
 import threading
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
-from typing import List
-
-import pytest
 
 lock = threading.Lock()
 
-interesting_lines_list = json.load(open("to_track.json"))
-# convert to set for faster lookup
-interesting_lines = {filename: set(lines) for filename, lines in interesting_lines_list.items()}
-
-print("Conftest.py has interesting files: ", interesting_lines.keys())
+interesting_lines = None
 
 # indexed by file first, then line number
 file_info = defaultdict(lambda: defaultdict(list))
@@ -65,21 +55,40 @@ def trace_function(frame, event, arg):
 
     is_init = event == 'call' and code.co_name == '__init__'
 
-    for file, lines  in interesting_lines.items():
-        if file_path.match(file) and lineno in lines:
-            local_vars = { var_name: represent_variable(var_name, var_value, is_init) for var_name, var_value in frame.f_locals.items() }
-            print(f"Found {filename}:{lineno} {code.co_name} {local_vars}")
-            with lock:
-                file_info[filename][lineno].append(local_vars)
+    try:
+
+        for file, lines  in interesting_lines.items():
+            if file_path.match(file) and lineno in lines:
+                local_vars = { var_name: represent_variable(var_name, var_value, is_init) for var_name, var_value in frame.f_locals.items() }
+                print(f"Found {filename}:{lineno} {code.co_name} {local_vars}")
+                with lock:
+                    file_info[filename][lineno].append(local_vars)
+    except Exception as e:
+        print(f"Error processing {filename}:{lineno} {code.co_name}: {e}")
+
 
     return trace_function
 
 def pytest_sessionstart(session):
+    if session.config.getoption("collectonly", default=False):
+        print("Skipping trace setup due to --collect-only option")
+        return
+    
+    interesting_lines_list = json.load(open("to_track.json"))
+    # convert to set for faster lookup
+    interesting_lines = {filename: set(lines) for filename, lines in interesting_lines_list.items()}
+
+    print("Conftest.py has interesting files: ", interesting_lines.keys())
+
     sys.settrace(trace_function)
     threading.settrace(trace_function)
-    print("Tracing started.")
+    print("Tracing started, interesting files are: ", interesting_lines.keys())
 
 def pytest_sessionfinish(session, exitstatus):
+    if session.config.getoption("collectonly", default=False):
+        print("Skipping trace setup due to --collect-only option")
+        return
+    
     sys.settrace(None)
     threading.settrace(None)
     print("Tracing stopped.")
@@ -93,9 +102,9 @@ def process_tracing_data(debug = False):
     if debug:
         print("Tracing result:")
         for file, file_data in file_info.items():
-            print(f"File: {file}")
-            for line_no, line_vars in enumerate(file_data):
-                print(f"Line {line_no}: executed {len(line_vars)} times")
-                for var in line_vars:
-                    print(var)
+            print(f"File: {file}: {file_data}")
+            for line_no, line_runs in file_data.items():
+                print(f"Line {line_no}: executed {len(line_runs)} times")
+                for vars in line_runs:
+                    print(vars)
                 print("")

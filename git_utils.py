@@ -2,12 +2,12 @@ from collections import defaultdict
 from datetime import datetime
 import pdb
 from typing import Dict, Generator, List, Tuple, Set
-from pygit2 import GIT_SORT_TIME, GIT_SORT_TOPOLOGICAL, Repository, Walker
+import pygit2
 from itertools import islice
 
 
-def get_all_commits(repo: Repository) -> Walker:
-    return repo.walk(repo.head.target, GIT_SORT_TIME | GIT_SORT_TOPOLOGICAL)
+def get_all_commits(repo: pygit2.Repository) -> pygit2.Walker:
+    return repo.walk(repo.head.target, pygit2.GIT_SORT_TIME | pygit2.GIT_SORT_REVERSE)
 
 
 def skip_first(iterable):
@@ -32,7 +32,7 @@ def modifies_test_and_code(patches, test_files: Set[str]) -> bool:
             return True
     return False
 
-def get_commits_that_modify_test_and_code(repo: Repository, test_files: List[str]) -> Generator:
+def get_commits_that_modify_test_and_code(repo: pygit2.Repository, test_files: List[str]) -> Generator:
     # skip first as wer're only interested in bugfixes
     print('test_files:', test_files)
     for commit in skip_first(get_all_commits(repo)):
