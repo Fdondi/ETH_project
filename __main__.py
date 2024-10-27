@@ -65,6 +65,8 @@ def process_repo(repo_name: str, skip_existing = True, start_at = 0):
             commit = next_commit
             continue
 
+        my_checkout(repo, commit)
+
         diff = repo.diff(commit, next_commit)
         new_py_files = [delta.new_file.path for delta in diff.deltas if delta.status == pygit2.GIT_DELTA_ADDED and delta.new_file.path.endswith('.py')]
         if new_py_files or remaining_before_test_discovery <= 0:
