@@ -4,10 +4,17 @@ import sys
 import threading
 from collections import defaultdict
 from pathlib import Path
+from typing import Dict, Set
 
 lock = threading.Lock()
 
-interesting_lines = None
+def read_intersting_lines():
+    interesting_lines_list = json.load(open("to_track.json"))
+    # convert to set for faster lookup
+    interesting_lines = {filename: set(lines) for filename, lines in interesting_lines_list.items()}
+
+    print("Conftest.py has interesting files: ", interesting_lines.keys())
+    return interesting_lines
 
 # indexed by file first, then line number
 file_info = defaultdict(lambda: defaultdict(list))
@@ -39,15 +46,15 @@ def represent_variable(var_name, var_value, is_init: bool):
         return "<unrepresentable object> (error: {e})"
 
 
-def trace_function(frame, event, arg):
+def trace_function(frame, event, arg, interesting_lines: Dict[str, Set[int]]) -> None:
     if event not in ['line','call']:
-        return trace_function
+        return
     
     # Only trace your application code
     code = frame.f_code
     # also filter function=<module> which is the main function
     if code.co_name == "<module>":
-        return trace_function
+        return
 
     filename = code.co_filename
     file_path = Path(filename)
@@ -56,33 +63,32 @@ def trace_function(frame, event, arg):
     is_init = event == 'call' and code.co_name == '__init__'
 
     try:
-
         for file, lines  in interesting_lines.items():
             if file_path.match(file) and lineno in lines:
                 local_vars = { var_name: represent_variable(var_name, var_value, is_init) for var_name, var_value in frame.f_locals.items() }
-                print(f"Found {filename}:{lineno} {code.co_name} {local_vars}")
                 with lock:
                     file_info[filename][lineno].append(local_vars)
     except Exception as e:
         print(f"Error processing {filename}:{lineno} {code.co_name}: {e}")
 
+class TraceFunction:
+    def __init__(self):
+        self.interesting_lines = read_intersting_lines()
 
-    return trace_function
+    def __call__(self, frame, event, arg):
+        trace_function(frame, event, arg, self.interesting_lines)
+        return self
+
 
 def pytest_sessionstart(session):
     if session.config.getoption("collectonly", default=False):
         print("Skipping trace setup due to --collect-only option")
         return
-    
-    interesting_lines_list = json.load(open("to_track.json"))
-    # convert to set for faster lookup
-    interesting_lines = {filename: set(lines) for filename, lines in interesting_lines_list.items()}
 
-    print("Conftest.py has interesting files: ", interesting_lines.keys())
+    trace_function_callable = TraceFunction()
 
-    sys.settrace(trace_function)
-    threading.settrace(trace_function)
-    print("Tracing started, interesting files are: ", interesting_lines.keys())
+    sys.settrace(trace_function_callable)
+    threading.settrace(trace_function_callable)
 
 def pytest_sessionfinish(session, exitstatus):
     if session.config.getoption("collectonly", default=False):
