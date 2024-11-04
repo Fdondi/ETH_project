@@ -51,13 +51,23 @@ def process_repo(repo_name: str, skip_existing = True, start_at = 0):
     remaining_before_test_discovery = 0
     max_test_discovery_interval = 10
 
+    skipped_no_parent = []
+
     for next_commit in commit_walker:
         if commit.commit_time < start_at:
             commit = next_commit
             continue
 
+        if not commit in next_commit.parents:
+            print(f"{commit.id} (at {datetime.fromtimestamp(commit.commit_time)}), is not the parent of {next_commit.id} (at {datetime.fromtimestamp(next_commit.commit_time)}); skipping")
+            skipped_no_parent.append((commit.id, next_commit.id))
+            commit = next_commit
+            continue
+
         print(f"Processing commit {commit.id} (at {datetime.fromtimestamp(commit.commit_time)})")
 
+        # Note: Positive and negative examples are stored under the commit BEFORE the change
+        # So the positive example is actually relative to the FOLLWING commit.  
         data_path_commit = data_path.joinpath(f'{commit.id}')
 
         if skip_existing and data_path_commit.exists():
@@ -118,6 +128,8 @@ def process_repo(repo_name: str, skip_existing = True, start_at = 0):
         else:
             print("No result found for {commit.id}!")
 
+    print(len(skipped_no_parent))
+    print(skipped_no_parent[:100])
 
 if __name__ == "__main__":
-    process_repo('requests', start_at=datetime(2024, 1, 1).timestamp())
+    process_repo('requests', start_at=datetime(2019, 1, 1).timestamp())
