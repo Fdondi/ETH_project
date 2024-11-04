@@ -23,12 +23,12 @@ def collect_tests(pytest_args, test_estimate: int) -> Set[str]:
                 collected_lines.append(item.nodeid)
 
     # Run pytest in collection mode with the custom plugin
-    pytest_local_args = ['--collect-only', '-v'] + pytest_args
+    pytest_local_args = ['--collect-only', '-q'] + pytest_args
     result = pytest.main(pytest_local_args, plugins=[CollectPlugin()])
 
     # Check if pytest ran successfully
     if result != 0:
-        print("Pytest encountered errors...")
+        print(f"Pytest encountered errors, code: {result}")
     else:
         print("Pytest collection completed successfully.")
 
