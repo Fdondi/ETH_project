@@ -1,5 +1,6 @@
 # conftest.py
 import json
+import linecache
 import sys
 import threading
 from collections import defaultdict
@@ -46,15 +47,15 @@ def represent_variable(var_name, var_value, is_init: bool):
         return "<unrepresentable object> (error: {e})"
 
 
-def trace_function(frame, event, arg, interesting_lines: Dict[str, Set[int]]) -> None:
+def trace_function(frame, event, arg, previous_lines, interesting_lines: Dict[str, Set[int]]) -> None:
     if event not in ['line','call']:
-        return
+        return None
     
     # Only trace your application code
     code = frame.f_code
     # also filter function=<module> which is the main function
     if code.co_name == "<module>":
-        return
+        return None
 
     filename = code.co_filename
     file_path = Path(filename)
@@ -63,20 +64,37 @@ def trace_function(frame, event, arg, interesting_lines: Dict[str, Set[int]]) ->
     is_init = event == 'call' and code.co_name == '__init__'
 
     try:
+        current_line = linecache.getline(filename, lineno).strip()
         for file, lines  in interesting_lines.items():
             if file_path.match(file) and lineno in lines:
                 local_vars = { var_name: represent_variable(var_name, var_value, is_init) for var_name, var_value in frame.f_locals.items() }
+                data = {
+                    "code_context": previous_lines,
+                    "target_line": current_line,
+                    "variables": local_vars,
+                }
                 with lock:
-                    file_info[filename][lineno].append(local_vars)
+                    file_info[filename][lineno].append(data)
     except Exception as e:
         print(f"Error processing {filename}:{lineno} {code.co_name}: {e}")
 
-class TraceFunction:
-    def __init__(self):
-        self.interesting_lines = read_intersting_lines()
+    return current_line
 
+class TraceFunction:
+    def __init__(self, max_previous_lines=10):
+        self.interesting_lines = read_intersting_lines()
+        self.previous_lines = []
+        self.max_previous_lines = max_previous_lines
+
+    def _update_history(self, new_line: str | None):
+        if new_line:
+            self.previous_lines.append(new_line)
+            if len(self.previous_lines) > self.max_previous_lines:
+                self.previous_lines.pop(0)
+    
     def __call__(self, frame, event, arg):
-        trace_function(frame, event, arg, self.interesting_lines)
+        new_line = trace_function(frame, event, arg, self.previous_lines, self.interesting_lines)
+        self._update_history(new_line)    
         return self
 
 
